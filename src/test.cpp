@@ -5,6 +5,10 @@
 
 #define assert_equals(x, y, m) if((x) != (y)) std::cout << "FAILED TEST: " << (m) << std::endl
 
+#define X 1
+#define O -1
+#define EMPTY_PIECE 0
+
 void test_TTTBoard(){
 
 	bool t = 1;
@@ -62,6 +66,46 @@ void test_TTTBoard(){
 	assert_equals(b.O_victor(), false, "o draw test");
 	assert_equals(b.is_drawn(), true, "drawn test");
 	assert_equals(b.get_piece_count(), 9, "bulk piece count");
+
+	b.clear();
+
+	std::vector<std::vector<std::vector<int>>> cnn_input;
+	
+	cnn_input = b.get_empty_cnn_input();
+	assert_equals(cnn_input.size(), 2, "cnn input layers");
+	assert_equals(cnn_input[0].size(), 3, "cnn input layer width");
+	assert_equals(cnn_input[0][0].size(), 3, "cnn input layer height");
+	
+	b.fill_cnn_input_X(cnn_input);
+
+	for(int l=0; l<2; ++l){
+		for(int r=0; r<3; ++r){
+			for(int c=0; c<3; ++c){
+				assert_equals(cnn_input[l][r][c], EMPTY_PIECE, "cnn_default_empty");	
+			}
+		}		
+	}
+
+	b.place_O(0, 0);
+	b.place_O(1, 0);
+	b.place_O(0, 2);
+	b.place_X(0, 1);
+	b.place_X(2, 0);
+	b.place_O(2, 1);
+	b.place_X(1, 2);
+	b.place_X(2, 2);
+	b.place_O(1, 1);
+
+	b.fill_cnn_input_X(cnn_input);
+	for(int l=0; l<2; ++l){
+		for(int r=0; r<3; ++r){
+			for(int c=0; c<3; ++c){
+				if(!l && cnn_input[l][r][c]) assert_equals(b.get_piece(r, c), X, "cnn layer 0 match");	
+				if(l==1 && cnn_input[l][r][c]) assert_equals(b.get_piece(r, c), O, "cnn layer 1 match");	
+			}
+		}		
+	}
+	
 }
 
 void test_Board(){

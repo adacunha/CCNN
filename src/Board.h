@@ -32,7 +32,6 @@ class Board {
 				std::cout << std::endl;
 			}
 		}
-
 		bool remove_piece(int row_i, int col_i){
 			if(!valid_grid(row_i, col_i)) return false;
 			if(!is_index_occupied(row_i, col_i)) return false;
