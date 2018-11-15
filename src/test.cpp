@@ -1,5 +1,6 @@
 #include "Board.h"
 #include "TTTBoard.h"
+#include "NN.h"
 
 #include <iostream>
 
@@ -122,14 +123,27 @@ void test_Board(){
 	assert_equals(b.get_piece_count(), 0, "board count");
 }
 
+void test_NN(){
+	NN nn({2, 2});
+	std::vector<double> result = nn.feed_forward({0, 0});
+	nn.print_weights();
+	std::cout << "Result: ";
+	for(auto it = result.begin(); it != result.end(); ++it){
+		std::cout << *it << " ";
+	}
+	std::cout << std::endl;
+}
+
 void test_build(){
 	test_Board();
 	test_TTTBoard();
+	test_NN();
 }
 
 int main(){
 	std::cout << "Testing Build..." << std::endl << std::endl;
 	test_build();
 	std::cout << "Tests complete" << std::endl;
+
 	return 0;
 }
