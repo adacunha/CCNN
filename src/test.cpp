@@ -116,12 +116,6 @@ void test_Board(){
 void test_NN(){
 	NN nn({2, 2});
 	std::vector<double> result = nn.feed_forward({0, 0});
-	nn.print_weights();
-	std::cout << "Result: ";
-	for(auto it = result.begin(); it != result.end(); ++it){
-		std::cout << *it << " ";
-	}
-	std::cout << std::endl;
 }
 
 
