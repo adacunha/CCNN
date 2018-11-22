@@ -15,14 +15,15 @@ class NN {
 		int num_layers;
 		std::vector<std::vector<std::vector<double>>> weights;
 		std::vector<std::vector<double>> layers;
+		std::vector<double> feed_forward(const std::vector<double>& input);
 
 	public:	
 
-		NN(std::vector<int> layer_sizes);
+		NN(const std::vector<int>& layer_sizes);
+
+		double train(const std::vector<const std::vector<double>>& data);
 
 		void print_weights();
-
-		std::vector<double> feed_forward(std::vector<double> input);
 };
 
 #endif

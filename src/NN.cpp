@@ -1,6 +1,6 @@
 #include "NN.h"
 
-NN::NN(std::vector<int> layer_sizes){
+NN::NN(const std::vector<int>& layer_sizes){
 	this->num_layers = layer_sizes.size();
 
 	this->layers.resize(this->num_layers);
@@ -44,7 +44,7 @@ void NN::print_weights(){
 	}
 }
 
-std::vector<double> NN::feed_forward(std::vector<double> input){
+std::vector<double> NN::feed_forward(const std::vector<double>& input){
 
 	if(input.size() != this->layers[0].size()-1){
 		std::cout << "Can't feedforward, input layer size of " << input.size() << " doesn't match expected " << this->layers[0].size()-1 << std::endl;
@@ -66,6 +66,17 @@ std::vector<double> NN::feed_forward(std::vector<double> input){
 		}
 	}
 
+	// Copy and return output node values
 	std::vector<double>& output_layer = this->layers[this->layers.size()-1];
 	return std::vector<double>(output_layer.begin()+1, output_layer.end());
+}
+
+double NN::train(const std::vector<const std::vector<double>>& data){
+	if(data.size() && data[0].size() != this->layers[0].size()-1){
+		std::cout << "Input data wrong dimension!" << std::endl;	
+		return -1;
+	}
+
+	// Backprop
+
 }

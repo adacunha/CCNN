@@ -115,7 +115,6 @@ void test_Board(){
 
 void test_NN(){
 	NN nn({2, 2});
-	std::vector<double> result = nn.feed_forward({0, 0});
 }
 
 
