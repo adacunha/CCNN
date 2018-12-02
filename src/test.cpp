@@ -115,6 +115,19 @@ void test_Board(){
 
 void test_NN(){
 	NN nn({2, 2});
+	std::vector<std::vector<double>> train_data = {
+		{1, 1}, 
+		{1, 0}, 
+		{0, 1},
+		{0, 0}
+	};
+	std::vector<std::vector<double>> train_labels = {
+		{0, 0},
+		{1, 1},
+		{1, 1},
+		{0, 0}
+	};
+	nn.train(train_data, train_labels);
 }
 
 

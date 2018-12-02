@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <time.h>
 
+#include <cmath>
+
 #include <vector>
 #include <iostream>
 
@@ -15,14 +17,16 @@ class NN {
 		int num_layers;
 		std::vector<std::vector<std::vector<double>>> weights;
 		std::vector<std::vector<double>> layers;
+		std::vector<std::vector<double>> activations;
 		std::vector<double> feed_forward(const std::vector<double>& input);
+		double activation(double x);
+		double activation_prime(double x);
 
 	public:	
 
 		NN(const std::vector<int>& layer_sizes);
 
-		double train(const std::vector<const std::vector<double>>& data);
-
+		double train(const std::vector<std::vector<double>>& data, const std::vector<std::vector<double>>& labels);
 		void print_weights();
 };
 
