@@ -113,21 +113,76 @@ void test_Board(){
 	assert_equals(b.get_piece_count(), 0, "board count");
 }
 
+void test_matrix_util(){
+	std::vector<std::vector<double>> A = {
+		{1, 2},
+		{3, 4},
+		{5, 6}
+	};
+	std::vector<std::vector<double>> A_T = {
+		{1, 3, 5},
+		{2, 4, 6}
+	};
+	std::vector<std::vector<double>> B = {
+		{1, 2},
+		{3, 4}		   
+	};
+	std::vector<std::vector<double>> B_T = {
+		{1, 3},
+		{2, 4}
+	};
+	std::vector<std::vector<double>> a_b = {
+		{7, 10},
+		{15, 22},
+		{23, 34}
+	};
+
+	std::vector<std::vector<double>> A_t = matrix_transpose(A);
+	std::vector<std::vector<double>> B_t = matrix_transpose(B);
+	
+	if(A_t != A_T){
+		std::cout << "MESSED UP TRANSPOSE:" << std::endl;
+		print_matrix(A);
+		print_matrix(A_t);
+	}	
+
+	if(B_t != B_T){
+		std::cout << "MESSED UP TRANSPOSE:" << std::endl;
+		print_matrix(B);
+		print_matrix(B_t);
+	}	
+
+	std::vector<std::vector<double>> A_B = matrix_mult(A, B);
+	if(A_B != a_b){
+		std::cout << "MESSED UP MATRIX MULT!" << std::endl;
+		print_matrix(A);
+		print_matrix(B);
+		print_matrix(a_b);
+	}	
+
+}
+
 void test_NN(){
-	NN nn({2, 2});
+	NN nn({2, 1});
 	std::vector<std::vector<double>> train_data = {
-		{1, 1}, 
-		{1, 0}, 
-		{0, 1},
-		{0, 0}
+		{1, 1},
+		{1, -1},
+		{-1, 1},
+		{-1, -1} 
 	};
 	std::vector<std::vector<double>> train_labels = {
-		{0, 0},
-		{1, 1},
-		{1, 1},
-		{0, 0}
+		{1},
+		{-1},
+		{-1},
+		{-1}
 	};
-	nn.train(train_data, train_labels);
+	double initial_loss = nn.train(train_data, train_labels);
+	for(int i=0; i<5000; ++i){
+		nn.train(train_data, train_labels);
+	}
+	double final_loss = nn.train(train_data, train_labels);
+	std::cout << "initial_loss: " << initial_loss << std::endl;
+	std::cout << "final_loss: " << final_loss << std::endl << std::endl;
 }
 
 

@@ -4,6 +4,7 @@
 #include "Board.h"
 #include "TTTBoard.h"
 #include "NN.h"
+#include "MatrixUtil.h"
 
 #include <iostream>
 
@@ -15,9 +16,12 @@ void test_Board();
 
 void test_NN();
 
+void test_matrix_util();
+
 void test_build(){
 	test_Board();
 	test_TTTBoard();
+	test_matrix_util();
 	test_NN();
 }
 

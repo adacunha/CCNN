@@ -19,7 +19,7 @@ class NN {
 		std::vector<std::vector<double>> layers;
 		std::vector<std::vector<double>> activations;
 
-		double learning_rate = .001;
+		double learning_rate = .01;
 
 		std::vector<double>& feed_forward(const std::vector<double>& input);
 		double activation(double x);

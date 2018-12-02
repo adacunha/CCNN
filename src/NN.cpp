@@ -6,7 +6,7 @@ NN::NN(const std::vector<int>& layer_sizes){
 	this->num_layers = layer_sizes.size();
 
 	this->layers.resize(this->num_layers);
-	for(int l_i=0; l_i<layer_sizes.size(); ++l_i){
+	for(int l_i=0; l_i<this->num_layers; ++l_i){
 		int layer_size = layer_sizes[l_i];
 
 		// Add bias node to all but ouput layer
@@ -28,26 +28,20 @@ NN::NN(const std::vector<int>& layer_sizes){
 
 		// No weights to next layer bias node
 		int current_layer_size = this->layers[w_i+1].size() - 1;
+		if(w_i == this->weights.size()-1) current_layer_size++;
 
 		// Random weight initializations
 		weights[w_i].resize(prev_layer_size, std::vector<double>(current_layer_size));	
 		for(int r = 0; r < prev_layer_size; ++r){
 			for(int c=0; c<current_layer_size; ++c){
-				weights[w_i][r][c] = ((std::rand() - std::rand())%100000)/100000000.0;
+				weights[w_i][r][c] = ((std::rand() - std::rand())%100000)/1000000.0;
 			}
 		}
 	}
 }
 
 void NN::print_weights(){
-	for(int w = 0; w < this->weights.size(); ++w){
-		for(int r = 0; r < this->weights[w].size(); ++r){
-			for(int c=0; c < this->weights[w][r].size(); ++c){
-				std::cout << this->weights[w][r][c] << " ";
-			}
-			std::cout << std::endl;
-		}
-	}
+	for(int i=0; i<this->weights.size(); ++i) print_matrix(this->weights[i]);
 }
 
 // Sigmoid activation function
@@ -108,6 +102,7 @@ double NN::train(const std::vector<std::vector<double>>& data, const std::vector
 	double loss = 0;
 	for(int data_i=0; data_i<data.size(); ++data_i){
 		std::vector<double> loss_prime = this->feed_forward(data[data_i]);
+
 		for(int i=0; i<loss_prime.size(); ++i){
 
 			 // Calculate loss
@@ -127,25 +122,40 @@ double NN::train(const std::vector<std::vector<double>>& data, const std::vector
 			int layer_i = w_i+1;
 
 			int activation_count = this->activations[layer_i].size();
-			// Acount for bias nodes in input / hidden layers
-			if(w_i != this->weights.size()-1) activation_count--;			
-
+			// Don't include bias nodes
+			if(w_i != this->weights.size()-1) activation_count--;
+			
 			std::vector<std::vector<double>> activation_primes(activation_count, std::vector<double>(activation_count, 0));
 
 			int node_i = 0;
+			// Don't include bias node
 			if(w_i != this->weights.size()-1) node_i++;
-			for(int i=0; i<activation_count; ++i) activation_primes[i][i] = activation_prime(this->activations[layer_i][node_i++]);
+			for(int i=0; i<activation_count; ++i) activation_primes[i][i] = this->activation_prime(this->activations[layer_i][node_i++]);
+
 			current = matrix_mult(current, activation_primes);
 
-			// adjust current layer
-			for(int i=0; i<this->weights[w_i].size(); ++i){
-				for(int j=0; j<this->weights[w_i][0].size(); ++j){
-					this->weights[w_i][i][j] -= this->learning_rate * current[0][j] * this->activations[layer_i-1][i];
+			// Get transpose of current weights (exluding bias node);
+			std::vector<std::vector<double>> weights_t(this->weights[w_i].size()-1, std::vector<double>(this->weights[w_i][0].size()));
+			for(int i=0; i<weights_t.size(); ++i){
+				for(int j=0; j<weights_t[0].size(); ++j){
+					weights_t[i][j] = this->weights[w_i][i+1][j];
 				}
 			}
-			
-		}
+			weights_t = matrix_transpose(weights_t);
 
+			// adjust bias weights
+			for(int i=0; i<this->weights[w_i].size(); ++i) this->weights[w_i][0][i] -= this->learning_rate * current[0][i];
+
+			// adjust weights from layer
+			for(int i=1; i<this->weights[w_i].size(); ++i){
+				for(int j=0; j<this->weights[w_i][0].size(); ++j){
+					this->weights[w_i][i][j] += this->learning_rate * current[0][j] * this->activations[layer_i-1][i];
+				}
+			}
+
+			// Propagate error to next (previous) layer	
+			current = matrix_mult(current, weights_t);
+		}
 	}
-	return loss * 0.5;
+	return loss;
 }
