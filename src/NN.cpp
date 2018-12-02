@@ -119,22 +119,31 @@ double NN::train(const std::vector<std::vector<double>>& data, const std::vector
 		}
 
 		// Backprop
+
 		std::vector<std::vector<double>> current(1);
 		current[0] = loss_prime;
 
 		for(int w_i = this->weights.size()-1; w_i >= 0; --w_i){
 			int layer_i = w_i+1;
+
 			int activation_count = this->activations[layer_i].size();
-			std::cout << "activation_count: " << activation_count << std::endl;
-			std::cout << "current: " << current.size() << "," << current[0].size() << std::endl << std::endl;
+			// Acount for bias nodes in input / hidden layers
+			if(w_i != this->weights.size()-1) activation_count--;			
+
 			std::vector<std::vector<double>> activation_primes(activation_count, std::vector<double>(activation_count, 0));
 
-			for(int i=0; i<activation_count; ++i) activation_primes[i][i] = activation_prime(this->activations[layer_i][i]);
+			int node_i = 0;
+			if(w_i != this->weights.size()-1) node_i++;
+			for(int i=0; i<activation_count; ++i) activation_primes[i][i] = activation_prime(this->activations[layer_i][node_i++]);
 			current = matrix_mult(current, activation_primes);
 
-						
-
-			break;
+			// adjust current layer
+			for(int i=0; i<this->weights[w_i].size(); ++i){
+				for(int j=0; j<this->weights[w_i][0].size(); ++j){
+					this->weights[w_i][i][j] -= this->learning_rate * current[0][j] * this->activations[layer_i-1][i];
+				}
+			}
+			
 		}
 
 	}
