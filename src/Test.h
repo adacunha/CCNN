@@ -7,6 +7,7 @@
 #include "MatrixUtil.h"
 
 #include <iostream>
+#include <cstdlib>
 
 #define assert_equals(x, y, m) if((x) != (y)) std::cout << "FAILED TEST: " << (m) << std::endl
 

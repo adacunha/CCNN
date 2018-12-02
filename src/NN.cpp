@@ -12,7 +12,7 @@ NN::NN(const std::vector<int>& layer_sizes){
 		// Add bias node to all but ouput layer
 		if(l_i != this->num_layers-1) layer_size++;
 
-		this->layers[l_i].resize(layer_size);
+		this->layers[l_i] = std::vector<double>(layer_size, 0);
 
 		//set bias nodes
 		if(l_i != this->num_layers-1) this->layers[l_i][0] = 1;
@@ -34,7 +34,7 @@ NN::NN(const std::vector<int>& layer_sizes){
 		weights[w_i].resize(prev_layer_size, std::vector<double>(current_layer_size));	
 		for(int r = 0; r < prev_layer_size; ++r){
 			for(int c=0; c<current_layer_size; ++c){
-				weights[w_i][r][c] = ((std::rand() - std::rand())%100000)/1000000.0;
+				weights[w_i][r][c] = ((std::rand() - std::rand())%100000)/100000.0;
 			}
 		}
 	}
@@ -63,20 +63,20 @@ std::vector<double>& NN::feed_forward(const std::vector<double>& input){
 
 	// Set up input layer
 	for(int i=0; i<input.size(); ++i){
-		this->layers[0][i+1] = input[i];
+		this->layers[0][i+1] = activation(input[i]);
 		this->activations[0][i+1] = input[i];
 	}
 
 	// Propagate through middle layers
 	for(int l_i=1; l_i<this->num_layers; ++l_i){
-		int t_i = 1;
-		if(l_i == this->num_layers-1) t_i = 0;
-		for(; t_i<this->layers[l_i].size(); ++t_i){
-			this->activations[l_i][t_i] = 0;
+		int current_layer_i = l_i == this->num_layers-1 ? 0 : 1;
+		if(this->layers[l_i-1].size() != this->weights[l_i-1].size()) throw -1;
+		for(int weight_index=0; weight_index < this->weights[l_i-1][0].size(); ++weight_index, ++current_layer_i){
+			this->activations[l_i][current_layer_i] = 0;
 			for(int p_i=0; p_i<this->layers[l_i-1].size(); ++p_i){
-				this->activations[l_i][t_i] += this->layers[l_i-1][p_i] * this->weights[l_i-1][p_i][t_i-1];
+				this->activations[l_i][current_layer_i] += this->layers[l_i-1][p_i] * this->weights[l_i-1][p_i][weight_index];
 			}
-			this->layers[l_i][t_i] = this->activation(this->activations[l_i][t_i]);
+			this->layers[l_i][current_layer_i] = this->activation(this->activations[l_i][current_layer_i]);
 		}
 	}
 
@@ -86,30 +86,23 @@ std::vector<double>& NN::feed_forward(const std::vector<double>& input){
 }
 
 // Train using squared classification error loss function
-double NN::train(const std::vector<std::vector<double>>& data, const std::vector<std::vector<double>>& labels){
+void NN::train(const std::vector<std::vector<double>>& data, const std::vector<std::vector<double>>& labels){
 	if(data.size() && data[0].size() != this->layers[0].size()-1){
 		std::cout << "Input data wrong dimension!" << std::endl;	
-		return -1;
+		return;
 	}
 	if(labels.size() != data.size()){
 		std::cout << "Input labels don't match data" << std::endl;
-		return -1;
+		return;
 	}
 	if(labels.size() && labels[0].size() != this->layers[this->num_layers-1].size()){
 		std::cout << "Input labels don't match last nn layer!" << std::endl;
-		return -1;
+		return;
 	}
-	double loss = 0;
 	for(int data_i=0; data_i<data.size(); ++data_i){
 		std::vector<double> loss_prime = this->feed_forward(data[data_i]);
 
 		for(int i=0; i<loss_prime.size(); ++i){
-
-			 // Calculate loss
-			 double loss_i = (loss_prime[i] - labels[data_i][i]);
-			 loss_i *= loss_i;
-			 loss += loss_i;
-
 			loss_prime[i] -= labels[data_i][i];
 		}
 
@@ -155,6 +148,31 @@ double NN::train(const std::vector<std::vector<double>>& data, const std::vector
 
 			// Propagate error to next (previous) layer	
 			current = matrix_mult(current, weights_t);
+		}
+	}
+}
+
+std::vector<std::vector<double>> NN::predict(const std::vector<std::vector<double>>& input){
+	std::vector<std::vector<double>> result(input.size());
+	for(int i=0; i<input.size(); ++i){
+		result[i] = this->feed_forward(input[i]);	
+	}
+	return result;
+}
+
+std::vector<double> NN::predict(const std::vector<double>& input){
+	std::vector<std::vector<double>> input_t(1, input);
+	return this->predict(input_t)[0];
+}
+
+double NN::test(const std::vector<std::vector<double>>& data, const std::vector<std::vector<double>>& labels){
+	double loss = 0;
+	std::vector<std::vector<double>> guesses = this->predict(data);
+	for(int i=0; i<guesses.size(); ++i){
+		for(int j=0; j<guesses[i].size(); ++j){
+			double err = (guesses[i][j] - labels[i][j]);
+//			std::cout << err << std::endl;
+			loss += err * err;
 		}
 	}
 	return loss;

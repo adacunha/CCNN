@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <fstream>
 
 #include <cmath>
 
@@ -19,7 +20,7 @@ class NN {
 		std::vector<std::vector<double>> layers;
 		std::vector<std::vector<double>> activations;
 
-		double learning_rate = .01;
+		double learning_rate = 0.01;
 
 		std::vector<double>& feed_forward(const std::vector<double>& input);
 		double activation(double x);
@@ -29,7 +30,10 @@ class NN {
 
 		NN(const std::vector<int>& layer_sizes);
 
-		double train(const std::vector<std::vector<double>>& data, const std::vector<std::vector<double>>& labels);
+		void train(const std::vector<std::vector<double>>& data, const std::vector<std::vector<double>>& labels);
+		double test(const std::vector<std::vector<double>>& data, const std::vector<std::vector<double>>& labels);
+		std::vector<std::vector<double>> predict(const std::vector<std::vector<double>>& input);
+		std::vector<double> predict(const std::vector<double>& input);
 		void print_weights();
 };
 

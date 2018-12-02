@@ -163,26 +163,34 @@ void test_matrix_util(){
 }
 
 void test_NN(){
-	NN nn({2, 1});
-	std::vector<std::vector<double>> train_data = {
-		{1, 1},
-		{1, -1},
-		{-1, 1},
-		{-1, -1} 
-	};
-	std::vector<std::vector<double>> train_labels = {
-		{1},
-		{-1},
-		{-1},
-		{-1}
-	};
-	double initial_loss = nn.train(train_data, train_labels);
-	for(int i=0; i<5000; ++i){
-		nn.train(train_data, train_labels);
+	NN nn({1, 5, 10, 5, 1});
+	
+	int train_size = 10000;
+	int test_size = 1000;
+	std::vector<std::vector<double>> train_data(train_size, std::vector<double>(1));
+	std::vector<std::vector<double>> train_labels(train_size, std::vector<double>(1));
+	for(int i=0; i<train_size; ++i){
+		double rand_x = (rand() % 100000)/25000.0 - 2;
+		train_data[i][0] = rand_x;
+		train_labels[i][0] = std::sin(rand_x);
 	}
-	double final_loss = nn.train(train_data, train_labels);
-	std::cout << "initial_loss: " << initial_loss << std::endl;
-	std::cout << "final_loss: " << final_loss << std::endl << std::endl;
+
+	std::vector<std::vector<double>> test_data(test_size, std::vector<double>(1));
+	std::vector<std::vector<double>> test_labels(test_size, std::vector<double>(1));
+
+	for(int i=0; i<test_size; ++i){
+		double rand_x = (rand() % 100000)/25000.0 - 2;
+		test_data[i][0] = rand_x;
+		test_labels[i][0] = std::sin(rand_x);
+	}		
+
+	std::cout << "initial_loss: " << nn.test(test_data, test_labels) << std::endl;
+	for(int i=0; i<2000; ++i){
+		nn.train(train_data, train_labels);
+		std::cout << "loss: " << nn.test(test_data, test_labels) << std::endl << std::endl;
+	}	
+	std::cout << "final loss: " << nn.test(test_data, test_labels) << std::endl << std::endl;
+
 }
 
 
