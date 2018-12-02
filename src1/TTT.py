@@ -18,6 +18,8 @@ class Board:
 		self.left_diag = 0
 		self.right_diag = 0
 
+		self.played_pieces = 0;
+
 	def can_place_at(self, i, j):
 		return not self.board[i][j]
 				
@@ -29,6 +31,7 @@ class Board:
 		if(i + j == self.size-1):
 			self.right_diag += p
 		self.board[i][j] = p
+		self.played_pieces += 1
 
 	def remove_piece(self, i, j):
 		self.col_sums[j] -= self.board[i][j]
@@ -38,6 +41,7 @@ class Board:
 		if(i + j == self.size-1):
 			self.right_diag -= self.board[i][j]
 		self.board[i][j] = 0
+		self.played_pieces -= 1
 
 	def has_won(self):
 		for i, val in enumerate(self.col_sums):
@@ -55,3 +59,8 @@ class Board:
 			return self.board[0][self.size-1]
 
 		return 0
+
+	def is_drawn(self):
+		return self.played_pieces == self.size**2;
+
+	

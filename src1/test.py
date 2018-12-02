@@ -30,3 +30,5 @@ board.place_piece(2, 2, -1);
 
 if(-1 != board.has_won()):
 	print("WTF")
+
+
