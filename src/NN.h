@@ -18,7 +18,8 @@ class NN {
 		std::vector<std::vector<std::vector<double>>> weights;
 		std::vector<std::vector<double>> layers;
 		std::vector<std::vector<double>> activations;
-		std::vector<double> feed_forward(const std::vector<double>& input);
+
+		std::vector<double>& feed_forward(const std::vector<double>& input);
 		double activation(double x);
 		double activation_prime(double x);
 

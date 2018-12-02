@@ -1,3 +1,6 @@
+#ifndef __TEST_H_
+#define __TEST_H_
+
 #include "Board.h"
 #include "TTTBoard.h"
 #include "NN.h"
@@ -24,3 +27,5 @@ int main(){
 	std::cout << "Tests complete" << std::endl;
 	return 0;
 }
+
+#endif

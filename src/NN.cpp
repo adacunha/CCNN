@@ -1,4 +1,5 @@
 #include "NN.h"
+#include "MatrixUtil.h"
 
 NN::NN(const std::vector<int>& layer_sizes){
 	srand(std::time(NULL));
@@ -59,11 +60,11 @@ double NN::activation_prime(double x){
 	return activation(x) * (1 - activation(x));
 };
 
-std::vector<double> NN::feed_forward(const std::vector<double>& input){
+std::vector<double>& NN::feed_forward(const std::vector<double>& input){
 
 	if(input.size() != this->layers[0].size()-1){
 		std::cout << "Can't feedforward, input layer size of " << input.size() << " doesn't match expected " << this->layers[0].size()-1 << std::endl;
-		return {};
+		return this->layers[this->num_layers-1];
 	}
 
 	// Set up input layer
@@ -75,7 +76,7 @@ std::vector<double> NN::feed_forward(const std::vector<double>& input){
 	// Propagate through middle layers
 	for(int l_i=1; l_i<this->num_layers; ++l_i){
 		int t_i = 1;
-		if(l_i != this->num_layers-1) t_i = 0;
+		if(l_i == this->num_layers-1) t_i = 0;
 		for(; t_i<this->layers[l_i].size(); ++t_i){
 			this->activations[l_i][t_i] = 0;
 			for(int p_i=0; p_i<this->layers[l_i-1].size(); ++p_i){
@@ -104,6 +105,38 @@ double NN::train(const std::vector<std::vector<double>>& data, const std::vector
 		std::cout << "Input labels don't match last nn layer!" << std::endl;
 		return -1;
 	}
-	
-	return 0;
+	double loss = 0;
+	for(int data_i=0; data_i<data.size(); ++data_i){
+		std::vector<double> loss_prime = this->feed_forward(data[data_i]);
+		for(int i=0; i<loss_prime.size(); ++i){
+
+			 // Calculate loss
+			 double loss_i = (loss_prime[i] - labels[data_i][i]);
+			 loss_i *= loss_i;
+			 loss += loss_i;
+
+			loss_prime[i] -= labels[data_i][i];
+		}
+
+		// Backprop
+		std::vector<std::vector<double>> current(1);
+		current[0] = loss_prime;
+
+		for(int w_i = this->weights.size()-1; w_i >= 0; --w_i){
+			int layer_i = w_i+1;
+			int activation_count = this->activations[layer_i].size();
+			std::cout << "activation_count: " << activation_count << std::endl;
+			std::cout << "current: " << current.size() << "," << current[0].size() << std::endl << std::endl;
+			std::vector<std::vector<double>> activation_primes(activation_count, std::vector<double>(activation_count, 0));
+
+			for(int i=0; i<activation_count; ++i) activation_primes[i][i] = activation_prime(this->activations[layer_i][i]);
+			current = matrix_mult(current, activation_primes);
+
+						
+
+			break;
+		}
+
+	}
+	return loss * 0.5;
 }
