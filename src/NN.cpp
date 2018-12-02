@@ -34,10 +34,13 @@ NN::NN(const std::vector<int>& layer_sizes){
 		weights[w_i].resize(prev_layer_size, std::vector<double>(current_layer_size));	
 		for(int r = 0; r < prev_layer_size; ++r){
 			for(int c=0; c<current_layer_size; ++c){
-				weights[w_i][r][c] = ((std::rand() - std::rand())%100000)/100000.0;
+				weights[w_i][r][c] = ((std::rand() - std::rand())%100000)/1000000.0;
 			}
 		}
 	}
+
+	this->best_loss = (1<<30);
+	this->best_weights = this->weights;
 }
 
 void NN::print_weights(){
@@ -171,9 +174,13 @@ double NN::test(const std::vector<std::vector<double>>& data, const std::vector<
 	for(int i=0; i<guesses.size(); ++i){
 		for(int j=0; j<guesses[i].size(); ++j){
 			double err = (guesses[i][j] - labels[i][j]);
-//			std::cout << err << std::endl;
 			loss += err * err;
+			if(isnan(loss)){
+				std::cout << "NANANANAANNA: " << err << std::endl;
+				throw -1;
+			}
 		}
 	}
+	if(loss < best_loss) this->best_weights = this->weights;
 	return loss;
 }

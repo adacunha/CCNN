@@ -17,10 +17,12 @@ class NN {
 
 		int num_layers;
 		std::vector<std::vector<std::vector<double>>> weights;
+		std::vector<std::vector<std::vector<double>>> best_weights;
+		double best_loss;
 		std::vector<std::vector<double>> layers;
 		std::vector<std::vector<double>> activations;
 
-		double learning_rate = 0.01;
+		double learning_rate = 0.001;
 
 		std::vector<double>& feed_forward(const std::vector<double>& input);
 		double activation(double x);
