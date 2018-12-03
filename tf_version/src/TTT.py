@@ -7,6 +7,7 @@ import random
 	-1 => O
 	0 => empty
 """
+infinity = 100000
 
 class Board:
 	def __init__(self, size):
@@ -66,7 +67,7 @@ class Board:
 	def drawn(self):
 		return not len(self.open_plays)
 
-	def negamax(self, player, depth=0):
+	def negamax(self, player, alpha = -infinity, beta = infinity, depth=0):
 		winner = self.has_won()
 		if(winner):
 			return ((winner * player)/depth, (-1, -1))
@@ -74,15 +75,18 @@ class Board:
 			return (0, (-1, -1))
 		plays_to_check = list(self.open_plays)
 		random.shuffle(plays_to_check) 
-		best_score = -(1000000)
+		best_score = -(infinity)
 		best_play = (-1, -1)
 		for play in plays_to_check:
 			self.place_piece(play[0], play[1], player)
-			potential_play = self.negamax(-player, depth+1);
+			potential_play = self.negamax(-player, -beta, -alpha, depth+1);
+			self.remove_piece(play[0], play[1])
 			if(-potential_play[0] > best_score):
 				best_score = -potential_play[0]
 				best_play = play
-			self.remove_piece(play[0], play[1])
+				alpha = max(alpha, best_score)	
+				if(alpha > beta):
+					return (alpha, (-1, -1))
 		return (best_score, best_play)
 
 	def print(self):

@@ -1,0 +1,2 @@
+No A-B Pruning: 83.74971008300781 seconds
+With A-B Pruning: 19.193176746368408 seconds

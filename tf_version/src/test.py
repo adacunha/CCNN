@@ -3,6 +3,8 @@ import numpy as np
 from tensorflow.keras import layers
 import matplotlib.pyplot as plt
 
+import time
+
 import TTT
 
 board = TTT.Board(3);
@@ -42,6 +44,7 @@ test_play = board.negamax(-1);
 if(test_play[0] != 0):
 	print("NEGAMAX VALUE ERROR: " + str(test_play[0]))
 
+start = time.time()
 start_player = 1;
 for i in range(0, 10):
 	board.refresh()
@@ -54,3 +57,5 @@ for i in range(0, 10):
 	board.print()
 	if(board.has_won() != 0):
 		print("NEGAMAX ERROR!")
+end = time.time()
+print(end - start)
