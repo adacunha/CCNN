@@ -33,7 +33,6 @@ board.place_piece(0, 2, -1)
 if(-1 != board.has_won()):
 	print("WTF")
 
-
 board.refresh()
 test_play = board.negamax(1);
 if(test_play[0] != 0):
@@ -59,3 +58,14 @@ for i in range(0, 10):
 		print("NEGAMAX ERROR!")
 end = time.time()
 print(end - start)
+
+board.refresh()
+test_f = open("test_f.dat", 'a')
+board.log_to(test_f)
+test_move = board.negamax(1);
+
+board.refresh()
+board.place_piece(0, 0, 1)
+board.place_piece(1, 2, -1)
+
+one_hot_ans = [0 for i in range(0, 27)]

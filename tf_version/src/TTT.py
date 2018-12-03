@@ -13,6 +13,7 @@ class Board:
 	def __init__(self, size):
 		self.size = size;
 		self.refresh()
+		self.log_file = None
 
 	def refresh(self):
 		self.board = np.zeros((self.size, self.size))
@@ -87,7 +88,27 @@ class Board:
 				alpha = max(alpha, best_score)	
 				if(alpha > beta):
 					return (alpha, (-1, -1))
-		return (best_score, best_play)
+			if(self.log_file):
+				for i in range(0, self.size):
+					for j in range(0, self.size):
+						self.log_file.write(str(player * self.board[i][j]) + " ")
+				self.log_file.write(str(best_play[0] * self.size + best_play[1]) + "\n")
+		return(best_score, best_play)
+
+	def get_nn_input(self, player):
+		result = [0 for i in range(0, self.size * self.size)
+		for i in range(0, self.size):
+			for j in range(0, self.size):
+				if(self.board[i][j] == 0):
+					result[i*3] = 1
+				if(self.board[i][j] == 1):
+					result[i*3+1] = 1
+				if(self.board[i][j] == -1):
+					result[i*3+2] = 1
+		return result
+
+	def log_to(self, f):
+		self.log_file = f	
 
 	def print(self):
 		for row in range(0, self.size):
@@ -95,4 +116,3 @@ class Board:
 				print(str(self.board[row][col]) + " ", end='')
 			print()
 		print()
-
