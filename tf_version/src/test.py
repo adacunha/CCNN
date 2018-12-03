@@ -45,7 +45,7 @@ if(test_play[0] != 0):
 
 start = time.time()
 start_player = 1;
-for i in range(0, 10):
+for i in range(0, 1):
 	board.refresh()
 	start_player *= -1
 	current_player = start_player
@@ -53,7 +53,6 @@ for i in range(0, 10):
 		best_play = board.negamax(current_player)
 		board.place_piece(best_play[1][0], best_play[1][1], current_player)
 		current_player *= -1
-	board.print()
 	if(board.has_won() != 0):
 		print("NEGAMAX ERROR!")
 end = time.time()
@@ -67,5 +66,6 @@ test_move = board.negamax(1);
 board.refresh()
 board.place_piece(0, 0, 1)
 board.place_piece(1, 2, -1)
-
-one_hot_ans = [0 for i in range(0, 27)]
+board.print()
+one_hot_ans = board.get_nn_input(-1)
+print(one_hot_ans)

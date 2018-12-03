@@ -95,16 +95,21 @@ class Board:
 				self.log_file.write(str(best_play[0] * self.size + best_play[1]) + "\n")
 		return(best_score, best_play)
 
+	def random_move(self, player):
+		move = random.sample(self.open_plays, 1)[0]
+		self.place_piece(move[0], move[1], player)
+
 	def get_nn_input(self, player):
-		result = [0 for i in range(0, self.size * self.size)
+		result = [0 for i in range(0, self.size * self.size*3)]
 		for i in range(0, self.size):
 			for j in range(0, self.size):
+				index = (i * 3 + j) * 3
 				if(self.board[i][j] == 0):
-					result[i*3] = 1
-				if(self.board[i][j] == 1):
-					result[i*3+1] = 1
-				if(self.board[i][j] == -1):
-					result[i*3+2] = 1
+					result[index] = 1
+				if(player*self.board[i][j] == 1):
+					result[index+1] = 1
+				if(player*self.board[i][j] == -1):
+					result[index+2] = 1
 		return result
 
 	def log_to(self, f):

@@ -32,8 +32,8 @@ print(data[0])
 print(labels[0])
 
 model = tf.keras.models.Sequential([
-	keras.layers.Dense(100, activation=tf.nn.relu),
-	keras.layers.Dense(100, activation=tf.nn.relu),
+	keras.layers.Dense(50, activation=tf.nn.sigmoid),
+	keras.layers.Dense(100, activation=tf.nn.sigmoid),
     	keras.layers.Dense(9, activation=tf.nn.softmax)
 ])
 
@@ -41,7 +41,12 @@ model.compile(optimizer='adam',
               loss = 'categorical_crossentropy',
               metrics=['accuracy'])
 
-model.fit(data, labels, epochs=1, callbacks = [cp_callback])
-model.save_weights('nn_weights')
+checkpoint_path = "training_1/cp.ckpt"
+checkpoint_dir = os.path.dirname(checkpoint_path)
 
+# Create checkpoint callback
+cp_callback = tf.keras.callbacks.ModelCheckpoint(checkpoint_path, 
+                                                 save_weights_only=True,
+                                                 verbose=1)
 
+model.fit(data, labels, epochs=10, callbacks=[cp_callback])
