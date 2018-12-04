@@ -50,7 +50,6 @@ class Alpha:
 		move = self.get_policy_move(board, player)
 		board.place_piece(move[0], move[1], player)
 		return self.rollout(board, player*-1)
-
 			
 	# Use the networks to do MCTS
 	def get_move(self, board, player):
@@ -64,16 +63,13 @@ class Alpha:
 			leaf_node.expand(t_board, leaf_player, self)
 			leaf_value = (self.value_model.predict(np.array([t_board.get_nn_input(player)])))[0]
 			rollout_result = self.rollout(t_board, leaf_player)	
-			tot_score = .9 * rollout_result + .1 * leaf_value
+			tot_score = .25 * rollout_result + .75 * leaf_value
 			for node in history:
 				node.value += tot_score
 		max_count = -1
 		max_n = None
 		for move_node in root.children:
-			print(move_node.coord, end=" ")
-			print(move_node.get_score(), end = " ")
-			print(move_node.visit_count)
 			if(move_node.visit_count > max_count):
 				max_count = move_node.visit_count
 				max_n = move_node	
-		return move_node.coord
+		return max_n.coord
