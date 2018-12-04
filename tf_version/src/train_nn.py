@@ -7,7 +7,9 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 
-train_file = open("games_train.dat", 'r')
+model_name = "1_100_random_real"
+
+train_file = open("random_games_train_test.dat", 'r')
 
 data = []
 labels = []
@@ -32,8 +34,7 @@ print(data[0])
 print(labels[0])
 
 model = tf.keras.models.Sequential([
-	keras.layers.Dense(50, activation=tf.nn.sigmoid),
-	keras.layers.Dense(100, activation=tf.nn.sigmoid),
+	keras.layers.Dense(100, activation=tf.nn.relu),
     	keras.layers.Dense(9, activation=tf.nn.softmax)
 ])
 
@@ -41,7 +42,7 @@ model.compile(optimizer='adam',
               loss = 'categorical_crossentropy',
               metrics=['accuracy'])
 
-checkpoint_path = "training_1/cp.ckpt"
+checkpoint_path = "checkpoints/" + model_name + ".ckpt"
 checkpoint_dir = os.path.dirname(checkpoint_path)
 
 # Create checkpoint callback
@@ -49,4 +50,4 @@ cp_callback = tf.keras.callbacks.ModelCheckpoint(checkpoint_path,
                                                  save_weights_only=True,
                                                  verbose=1)
 
-model.fit(data, labels, epochs=10, callbacks=[cp_callback])
+model.fit(data, labels, epochs=500, callbacks=[cp_callback])

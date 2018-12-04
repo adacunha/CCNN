@@ -25,6 +25,9 @@ class Board:
 		for i in range(0, self.size):
 			for j in range(0, self.size):
 				self.open_plays.add((i, j))
+
+	def is_valid_move(self, i, j):
+		return not self.board[i][j]
 				
 	def place_piece(self, i, j, p):
 		self.row_sums[i] += p
@@ -88,11 +91,11 @@ class Board:
 				alpha = max(alpha, best_score)	
 				if(alpha > beta):
 					return (alpha, (-1, -1))
-			if(self.log_file):
-				for i in range(0, self.size):
-					for j in range(0, self.size):
-						self.log_file.write(str(player * self.board[i][j]) + " ")
-				self.log_file.write(str(best_play[0] * self.size + best_play[1]) + "\n")
+		if(not depth and self.log_file):
+			for i in range(0, self.size):
+				for j in range(0, self.size):
+					self.log_file.write(str(player * self.board[i][j]) + " ")
+			self.log_file.write(str(best_play[0] * self.size + best_play[1]) + "\n")
 		return(best_score, best_play)
 
 	def random_move(self, player):
