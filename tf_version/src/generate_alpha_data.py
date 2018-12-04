@@ -1,9 +1,8 @@
-
 import TTT
 
-board = TTT.Board(3);
+board = TTT.Board(4);
 
-data_file = open("random_games_train_test.dat", "a")
+data_file = open("alpha_train.dat", "a")
 board.log_to(data_file)
 
 training_size = 100
