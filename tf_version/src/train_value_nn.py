@@ -7,7 +7,7 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 
-model_name = "1_100"
+model_name = "1_64"
 
 train_file = open("value_data.dat", 'r')
 
@@ -23,12 +23,11 @@ data = np.array(data)
 labels = np.array(labels)
 
 model = keras.Sequential([ keras.layers.Dense(64, activation=tf.nn.relu), 
-			keras.layers.Dense(64, activation=tf.nn.relu), 
 			keras.layers.Dense(1)])
 
 model.compile(loss='mse', optimizer=tf.train.RMSPropOptimizer(0.001), metrics=['mae'])
 
-checkpoint_path = "value_model_checkpoints/" + model_name + ".ckpt"
+checkpoint_path = "value_network_checkpoints/" + model_name + ".ckpt"
 checkpoint_dir = os.path.dirname(checkpoint_path)
 
 # Create checkpoint callback

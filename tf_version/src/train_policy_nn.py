@@ -7,9 +7,9 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 
-model_name = "1_100_random_real"
+model_name = "1_64"
 
-train_file = open("random_games_train_test.dat", 'r')
+train_file = open("policy_train.dat", 'r')
 
 data = []
 labels = []
@@ -34,7 +34,7 @@ print(data[0])
 print(labels[0])
 
 model = tf.keras.models.Sequential([
-	keras.layers.Dense(100, activation=tf.nn.relu),
+	keras.layers.Dense(64, activation=tf.nn.relu),
     	keras.layers.Dense(9, activation=tf.nn.softmax)
 ])
 

@@ -43,3 +43,12 @@ NN(9, trained on random-alpha) Vs Random:
 	NN won : 52.3% of games
 	Random won : 32.4% of games
 	Draw: 15.3% of games
+
+NN(36, trained on random-alpha) vs Random:
+	NN won : 80.8% of games
+	Alpha won : 2.1% of games
+	Draw: 17.1% of games
+NN(36, trained on random-alpha) vs Alpha):
+	NN won : 0.0% of games
+	Alpha won : 13.0% of games
+	Draw: 87.0% of games
