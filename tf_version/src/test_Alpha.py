@@ -12,6 +12,10 @@ alpha = Alpha.Alpha(64, "policy_network_checkpoints/1_64.ckpt", 64, "value_netwo
 
 board = TTT.Board(3)
 
+print(alpha.get_move(board, 1))
+
+'''
+
 alpha_player = 1
 other_player = -1
 
@@ -34,7 +38,6 @@ for game_i in range(0, game_count):
 			board.random_move(current_player)
 		current_player *= -1
 	result = board.has_won()
-	board.print()
 	print("Starting player: " + str(starting_player))
 	if(result == 1):
 		print("Alpha WON!")
@@ -49,3 +52,5 @@ for game_i in range(0, game_count):
 print("Alpha won : " + str(alpha_count*100/game_count) + "% of games");
 print("Other won : " + str(other_count*100/game_count) + "% of games");
 print("Draw: " + str(draw_count*100/game_count) + "% of games");
+
+'''

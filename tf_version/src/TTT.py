@@ -115,6 +115,14 @@ class Board:
 					result[index+2] = 1
 		return result
 
+	def get_copy(self):
+		result = Board(self.size)
+		for i in range(0, self.size):
+			for j in range(0, self.size):
+				if(self.board[i][j]):
+					result.place_piece(i, j, self.board[i][j])
+		return result
+
 	def log_to(self, f):
 		self.log_file = f	
 

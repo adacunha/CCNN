@@ -29,6 +29,3 @@ board.place_piece(2, 0, 1)
 if(model.predict(np.array([board.get_nn_input(nn_player)]))[0] != 1):
 	print("VALUE ERROR")
 
-board.refresh()
-
-print(model.predict(np.array([board.get_nn_input(nn_player)])))
