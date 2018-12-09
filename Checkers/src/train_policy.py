@@ -4,7 +4,7 @@ from tensorflow import keras
 import numpy as np
 import matplotlib.pyplot as plt
 
-model_name = "100r_100r_100r"
+model_name = "1000r_1000r"
 
 data = []
 labels = []
@@ -25,9 +25,8 @@ print(data)
 print(labels)
 
 model = tf.keras.models.Sequential([
-	keras.layers.Dense(100, activation=tf.nn.relu),
-	keras.layers.Dense(100, activation=tf.nn.relu),
-	keras.layers.Dense(100, activation=tf.nn.relu),
+	keras.layers.Dense(1000, activation=tf.nn.relu),
+	keras.layers.Dense(1000, activation=tf.nn.relu),
     	keras.layers.Dense(128, activation=tf.nn.softmax)
 ])
 

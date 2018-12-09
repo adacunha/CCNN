@@ -2,7 +2,7 @@ import Checkers
 import re
 
 raw_data_path = "../data/games.txt"
-parsed_data_path = "../data/parsed_games.txt"
+parsed_data_path = "../data/parsed_games_small.txt"
 
 board = Checkers.Board()
 
@@ -47,12 +47,20 @@ train_data = []
 
 with open(raw_data_path, 'r') as data_file:
 	game_str = ""
+	winner = 0
 	for line in data_file:
+		line = line.strip()
+		if not len(line):
+			continue
+		print("-")
+		print(line)
+		print("-")
 		if line[0] != '[':
-			line = line.strip()
 			if len(line) == 0:
 				orig_game_str = game_str
 				game_str = re.sub(r'\{[^\}]*\}', '', game_str)
+				print(game_str)
+				print("WINNER: ", winner)
 				#try:
 				train_data.extend(get_game_data(board, game_str))
 				#except:
@@ -60,9 +68,18 @@ with open(raw_data_path, 'r') as data_file:
 				#	board.show()
 				#	break
 				board.refresh()
+				winner = 0
 				game_str = ""
 			else:
 				game_str = game_str + " " + line
+		if line[0] == '[' and line[1] == 'R':
+			result_str = line.split("\"")[1].strip()
+			draw_test = result_str.split("/")
+			if len(draw_test) > 1:
+				winner = 0
+				continue
+			results = result_str.split("-")
+			winner = 1 if int(results[0]) == 1 else -1
 
 with open(parsed_data_path, 'w') as output_file:
 	for data_point in train_data:
