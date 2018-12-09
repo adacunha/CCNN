@@ -37,6 +37,11 @@ class Board:
 	def place_piece(self, coord, piece):
 		self.unoccupied_squares.remove(coord)
 		self.occupied_squares[coord] = piece
+
+	def move_piece(self, coords):
+		to_square = coords[1]
+		from_square = coords[0]
+			
 	
 	def remove_piece(self, coord):
 		self.occupied_squares.remove(coord)
@@ -46,6 +51,12 @@ class Board:
 		if coord in self.occupied_squares:
 			return self.occupied_squares[coord];
 		return 0
+
+	def get_black_piece(self):
+		return 1
+
+	def get_white_piece(self):
+		return -1
 		
 	def show(self):
 		for i in range(0, 32):
@@ -58,5 +69,5 @@ class Board:
 			print(self.get_piece(i+1), end='')
 		print(" ", end='')
 	
-	def get_nn_input(self):
-		return [self.get_piece(i) for i in range(1, 33)]
+	def get_nn_input(self, player):
+		return [self.get_piece(i) * player for i in range(1, 33)]
