@@ -13,8 +13,8 @@ def get_turn_coords(turn):
 		squares = turn.split('x')
 	if len(squares) < 2:
 		print("TURN PARSING FUCKED UP ON: " + turn)
-	from_square = squares[0]
-	to_square = squares[len(squares)-1]
+	from_square = int(squares[0])
+	to_square = int(squares[len(squares)-1])
 	return (from_square, to_square)
 
 def get_turn_data(board, current_player, turn):
@@ -22,7 +22,14 @@ def get_turn_data(board, current_player, turn):
 	return (board.get_nn_input(current_player), turn_coords)	
 
 def make_move(board, turn):
-	board.move_piece(get_turn_coords(turn))
+	jumps = turn.split('x')
+	if len(jumps) == 1:
+		board.move_piece(get_turn_coords(turn))
+		return
+	for i in range(1, len(jumps)):
+		last = int(jumps[i-1])
+		next = int(jumps[i])	
+	board.capture(last, next)
 
 def get_game_data(board, game_str):
 
@@ -38,6 +45,8 @@ def get_game_data(board, game_str):
 		if not i%3:
 			continue
 		move_data = get_turn_data(board, current_player, turn)
+		turn_data.append(move_data)
+		board.show()
 		make_move(board, turn)
 		current_player = black_piece if current_player == white_piece else white_piece		
 

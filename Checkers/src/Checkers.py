@@ -39,12 +39,43 @@ class Board:
 		self.occupied_squares[coord] = piece
 
 	def move_piece(self, coords):
-		to_square = coords[1]
 		from_square = coords[0]
-			
+		to_square = coords[1]
+		piece = self.get_piece(from_square)
+		self.remove_piece(from_square)
+		self.place_piece(to_square, piece);
+
+	def capture(self, coords):
+		piece = self.get_piece(coords[0])
+		self.remove_piece(coords[0])
+		self.remove_piece()
+		self.place_piece(to_square, piece)
+
+	def get_hopped_coord(self, start_coord, end_coord):
+		start_index = self.coord_to_index(start_coord)
+		end_index = self.coord_to_index(end_coord)
+		delta_x = end_index[0] - start_index[0]
+		delta_y = end_index[1] - start_index[1]
+		return self.index_to_coord((start_index[0] + int(delta_x/2), start_index[1] + int(delta_y/2)))
+
+	def coord_to_index(self, coord):
+		row = int((coord-1)/4)
+		col = (coord-1) % 4
+		col = col * 2
+		if not row&1:
+			col = col + 1	
+		return (row, col)
+
+	def index_to_coord(self, index):
+		row = index[0]
+		col = index[1]
+		if not row&1:
+			col = col - 1	
+		col = int(col / 2)
+		return 4 * row + (col+1)
 	
 	def remove_piece(self, coord):
-		self.occupied_squares.remove(coord)
+		del self.occupied_squares[coord]
 		self.unoccupied_squares.add(coord)
 
 	def get_piece(self, coord):
@@ -59,6 +90,7 @@ class Board:
 		return -1
 		
 	def show(self):
+		print()
 		for i in range(0, 32):
 			if i != 0 and not i%4 and int(i/4)&1:
 				print()
@@ -68,6 +100,7 @@ class Board:
 				print()
 			print(self.get_piece(i+1), end='')
 		print(" ", end='')
+		print()
 	
 	def get_nn_input(self, player):
 		return [self.get_piece(i) * player for i in range(1, 33)]
