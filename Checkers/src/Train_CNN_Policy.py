@@ -4,7 +4,7 @@ from tensorflow import keras
 import numpy as np
 import matplotlib.pyplot as plt
 
-model_name = "16c_8c"
+model_name = "64c_32c_1000r"
 
 data = []
 labels = []
@@ -25,6 +25,7 @@ model = tf.keras.models.Sequential([
 	keras.layers.Conv2D(64, kernel_size=(2, 2), strides=(1, 1), activation='relu', input_shape=(8,4,1)),
 	keras.layers.Conv2D(32, kernel_size=(2, 2), strides=(1, 1), activation='relu'),
 	keras.layers.Flatten(),
+    	keras.layers.Dense(1024, activation='relu'),
     	keras.layers.Dense(128, activation=tf.nn.softmax)
 ])
 
@@ -39,4 +40,4 @@ checkpoint_dir = os.path.dirname(checkpoint_path)
 # Create checkpoint callback
 cp_callback = tf.keras.callbacks.ModelCheckpoint(checkpoint_path, save_weights_only=True, verbose=1)
 
-model.fit(data, labels, epochs=10, callbacks=[cp_callback])
+model.fit(data, labels, epochs=50, callbacks=[cp_callback])
