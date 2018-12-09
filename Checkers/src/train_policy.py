@@ -29,7 +29,7 @@ def make_move(board, turn):
 	for i in range(1, len(jumps)):
 		last = int(jumps[i-1])
 		next = int(jumps[i])	
-	board.capture(last, next)
+		board.capture((last, next))
 
 def get_game_data(board, game_str):
 
@@ -46,9 +46,10 @@ def get_game_data(board, game_str):
 			continue
 		move_data = get_turn_data(board, current_player, turn)
 		turn_data.append(move_data)
-		board.show()
 		make_move(board, turn)
 		current_player = black_piece if current_player == white_piece else white_piece		
+
+	return turn_data
 
 train_data = []
 
@@ -64,3 +65,5 @@ with open(data_path, 'r') as data_file:
 				break
 			else:
 				game_str = game_str + " " + line
+
+print(train_data)

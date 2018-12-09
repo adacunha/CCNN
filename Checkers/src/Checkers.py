@@ -46,10 +46,12 @@ class Board:
 		self.place_piece(to_square, piece);
 
 	def capture(self, coords):
-		piece = self.get_piece(coords[0])
-		self.remove_piece(coords[0])
-		self.remove_piece()
-		self.place_piece(to_square, piece)
+		start = coords[0]
+		end = coords[1]
+		piece = self.get_piece(start)
+		self.remove_piece(start)
+		self.remove_piece(self.get_hopped_coord(start, end))
+		self.place_piece(end, piece)
 
 	def get_hopped_coord(self, start_coord, end_coord):
 		start_index = self.coord_to_index(start_coord)
