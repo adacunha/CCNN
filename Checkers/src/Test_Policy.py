@@ -7,11 +7,11 @@ import seaborn as sns
 
 import Checkers
 
-test_model_name = "mark1_64r"
+test_model_name = "100r"
 
 model = tf.keras.models.Sequential([
-	layers.Dense(64, activation=tf.nn.relu),
-    	layers.Dense(1024, activation=tf.nn.softmax)
+	layers.Dense(100, activation=tf.nn.relu),
+    	layers.Dense(128, activation=tf.nn.softmax)
 ])
 
 checkpoint_path = "policy_network_checkpoints/" + test_model_name + ".ckpt"
@@ -27,5 +27,6 @@ player_2 = board.get_white_piece()
 nn_input = board.get_nn_input(player_1)
 
 nn_first_move = model.predict(np.array([nn_input]))[0]
-
-print(len(nn_first_move))
+first_move = np.argmax(predictions[0])
+print(nn_first_move)
+print(first_move)
