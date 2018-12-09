@@ -4,7 +4,7 @@ from tensorflow import keras
 import numpy as np
 import matplotlib.pyplot as plt
 
-model_name = "mark1_64r"
+model_name = "100r"
 
 data = []
 labels = []
@@ -14,7 +14,7 @@ with open(train_data_file) as dat_file:
 	for line in dat_file:
 		raw_data = line.strip().split()	
 		x = [int(x) for x in raw_data[0:32]]
-		y = [int(y) for y in raw_data[32:34]]
+		y = [int(y) for y in raw_data[32:160]]
 		data.append(x)
 		labels.append(y)
 
@@ -25,8 +25,8 @@ print(data)
 print(labels)
 
 model = tf.keras.models.Sequential([
-	keras.layers.Dense(64, activation=tf.nn.relu),
-    	keras.layers.Dense(2, activation=tf.nn.softmax)
+	keras.layers.Dense(100, activation=tf.nn.relu),
+    	keras.layers.Dense(128, activation=tf.nn.softmax)
 ])
 
 model.compile(optimizer='adam',

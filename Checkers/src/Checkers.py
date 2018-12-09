@@ -36,6 +36,10 @@ class Board:
 
 	def place_piece(self, coord, piece):
 		self.unoccupied_squares.remove(coord)
+		if piece == self.get_black_piece() and coord >= 29:
+			piece  = piece * 2
+		if piece == self.get_white_piece() and coord <= 4:
+			piece = piece * 2
 		self.occupied_squares[coord] = piece
 
 	def move_piece(self, coords):
@@ -106,3 +110,19 @@ class Board:
 	
 	def get_nn_input(self, player):
 		return [self.get_piece(i) * player for i in range(1, 33)]
+
+	def get_nn_output(self, coord):
+		from_index = self.coord_to_index(coord[0])
+		to_index = self.coord_to_index(coord[1])
+		delta_x = to_index[1] - from_index[1]
+		delta_y = to_index[0] - from_index[0]
+		offset = 0	
+		if delta_x > 0 and delta_y < 0:
+			offset = 1
+		if delta_x < 0 and delta_y > 0:
+			offset = 2
+		if delta_x > 0 and delta_y > 0:
+			offset = 3
+		result = [0 for i in range(0, 128)]
+		result[(coord[0]-1)*4+offset] = 1
+		return result

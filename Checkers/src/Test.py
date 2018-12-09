@@ -18,3 +18,9 @@ assert(board.get_hopped_coord(17, 26) == 22)
 assert(board.get_hopped_coord(31, 24) == 27)
 assert(board.get_hopped_coord(32, 23) == 27)
 assert(board.get_hopped_coord(19, 12) == 16)
+
+assert(board.get_nn_output((19, 10))[72])
+assert(board.get_nn_output((19, 12))[73])
+assert(board.get_nn_output((19, 26))[74])
+assert(board.get_nn_output((19, 28))[75])
+

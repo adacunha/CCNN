@@ -6,29 +6,23 @@ parsed_data_path = "../data/parsed_games.txt"
 
 board = Checkers.Board()
 
-def get_turn_coords(turn):
-	squares = turn.split('-')
-	if len(squares) == 1:
-		squares = turn.split('x')
-	if len(squares) < 2:
-		print("TURN PARSING FUCKED UP ON: " + turn)
-	from_square = int(squares[0])
-	to_square = int(squares[len(squares)-1])
-	return (from_square, to_square)
-
 def get_turn_data(board, current_player, turn):
-	turn_coords = get_turn_coords(turn)
-	return (board.get_nn_input(current_player), turn_coords)	
-
-def make_move(board, turn):
-	jumps = turn.split('x')
+	data = []
+	capturing = False
+	jumps = turn.split('-')
 	if len(jumps) == 1:
-		board.move_piece(get_turn_coords(turn))
-		return
+		capturing = True
+		jumps = turn.split('x')
+
 	for i in range(1, len(jumps)):
-		last = int(jumps[i-1])
-		next = int(jumps[i])	
-		board.capture((last, next))
+		start = int(jumps[i-1])
+		end = int(jumps[i])
+		data.append((board.get_nn_input(current_player), board.get_nn_output((start, end))))
+		if capturing:
+			board.capture((start, end))
+		else:
+			board.move_piece((start, end))
+	return data
 
 def get_game_data(board, game_str):
 
@@ -44,8 +38,7 @@ def get_game_data(board, game_str):
 		if not i%3:
 			continue
 		move_data = get_turn_data(board, current_player, turn)
-		turn_data.append(move_data)
-		make_move(board, turn)
+		turn_data.extend(move_data)
 		current_player = black_piece if current_player == white_piece else white_piece		
 
 	return turn_data
@@ -60,14 +53,12 @@ with open(raw_data_path, 'r') as data_file:
 			if len(line) == 0:
 				orig_game_str = game_str
 				game_str = re.sub(r'\{[^\}]*\}', '', game_str)
-				try:
-					train_data.extend(get_game_data(board, game_str))
-				except:
-					print()
-					print("EXCEPTION ON: ")
-					print(orig_game_str)
-					print(game_str)
-					print()
+				#try:
+				train_data.extend(get_game_data(board, game_str))
+				#except:
+				#	print("EXCEPTION ON PARSE: ")
+				#	board.show()
+				#	break
 				board.refresh()
 				game_str = ""
 			else:
