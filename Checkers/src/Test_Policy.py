@@ -27,16 +27,22 @@ board = Checkers.Board()
 player_1 = board.get_black_piece()
 player_2 = board.get_white_piece()
 
-nn_input = board.get_nn_input(player_1)
-
-board_input = np.array([nn_input]).reshape((8, 4, 1));
+cnn_input = board.get_cnn_input(player_1)
 
 network_input = []
-network_input.append(board_input)
+network_input.append(cnn_input)
 network_input = np.array(network_input)
 
 predictions = model.predict(network_input)
 
 first_move_guess = np.argmax(predictions[0])
+first_move_coords = board.parse_nn_output(first_move_guess)
+print("First move: ", board.parse_nn_output(first_move_guess))
+board.move_piece(first_move_coords)
 
-print(first_move_guess)
+network_input = np.array([board.get_cnn_input(player_2)])
+second_move_guess = np.argmax(model.predict(network_input))
+second_move_coords = board.parse_nn_output(second_move_guess)
+print("Second move: ", second_move_coords)
+board.move_piece(second_move_coords)
+

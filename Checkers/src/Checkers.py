@@ -1,3 +1,4 @@
+import numpy as np
 
 class Board:
 	
@@ -111,6 +112,10 @@ class Board:
 	def get_nn_input(self, player):
 		return [self.get_piece(i) * player for i in range(1, 33)]
 
+	def get_cnn_input(self, player):
+		nn_input = self.get_nn_input(player)
+		return np.array([nn_input]).reshape((8, 4, 1));
+
 	def get_nn_output(self, coord):
 		from_index = self.coord_to_index(coord[0])
 		to_index = self.coord_to_index(coord[1])
@@ -126,3 +131,20 @@ class Board:
 		result = [0 for i in range(0, 128)]
 		result[(coord[0]-1)*4+offset] = 1
 		return result
+
+	def parse_nn_output(self, nn_output):
+		from_coord = int(nn_output/4)+1
+		from_index = self.coord_to_index(from_coord)
+		direction = nn_output%4
+		delta_x = -1
+		delta_y = -1
+		if direction == 1 or direction == 3:
+			delta_x = 1
+		if direction == 2 or direction == 3:
+			delta_y = 1
+		to_index = (from_index[0]+delta_y, from_index[1]+delta_x)		
+		to_coord = self.index_to_coord(to_index)
+		if to_coord in self.occupied_squares:
+			to_index = (to_index[0]+delta_y, to_index[1]+delta_x)
+			to_coord = self.index_to_coord(to_index)
+		return (from_coord, to_coord)
