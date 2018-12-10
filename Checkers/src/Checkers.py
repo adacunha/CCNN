@@ -20,7 +20,12 @@ class Board:
 		self.unoccupied_squares = set()
 		for i in range(1, 33):
 			self.unoccupied_squares.add(i)
-		
+
+	def deep_copy(self):
+		result = Board()
+		result.occupied_squares = self.occupied_squares
+		result.unoccupied_squares = self.unoccupied_squares
+		return result
 
 	def place_opponent_pawn(self, player, coord):
 		piece = -1 if player == 1 else 1

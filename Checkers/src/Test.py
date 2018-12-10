@@ -23,4 +23,3 @@ assert(board.get_nn_output((19, 10))[72])
 assert(board.get_nn_output((19, 12))[73])
 assert(board.get_nn_output((19, 26))[74])
 assert(board.get_nn_output((19, 28))[75])
-
