@@ -132,9 +132,31 @@ class Board:
 		result[(coord[0]-1)*4+offset] = 1
 		return result
 
-	def parse_nn_output(self, nn_output):
+	def is_valid_index(self, index):
+		if index[0] < 0 or index[0] > 7:
+			print("Invalid move: Out of board!")
+			return False
+		if index[1] < 0 or index[1] > 3:
+			print("Invalid move: Out of board!")
+			return False
+		return True
+
+	def parse_nn_output(self, nn_output, player):
+
+		invalid_response = (-1, (-1, -1))
+
 		from_coord = int(nn_output/4)+1
+
+		if from_coord in self.unoccupied_squares:
+			print("Invalid move: No Piece at Tile!")
+			return invalid_response	
+
+		if self.occupied_squares[from_coord] != player:
+			print("Invalid move: Not your piece!")
+			return invalid_response
+
 		from_index = self.coord_to_index(from_coord)
+
 		direction = nn_output%4
 		delta_x = -1
 		delta_y = -1
@@ -142,14 +164,27 @@ class Board:
 			delta_x = 1
 		if direction == 2 or direction == 3:
 			delta_y = 1
-		to_index = (from_index[0]+delta_y, from_index[1]+delta_x)		
-		to_coord = self.index_to_coord(to_index)
-		if to_coord in self.occupied_squares:
-			to_index = (to_index[0]+delta_y, to_index[1]+delta_x)
-			to_coord = self.index_to_coord(to_index)
-		return (from_coord, to_coord)
 
-	def is_valid_nn_output(self, nn_output, player):
-
-	def clean_nn_output(self, nn_output, player):
+		to_index = (from_index[0]+delta_y, from_index[1]+delta_x)
 		
+		if not self.is_valid_index(to_index):
+			print("Invalid move: Index out of board!")
+			return invalid_response
+
+		to_coord = self.index_to_coord(to_index)
+
+		if to_coord in self.unoccupied_squares:
+			return (1, (from_coord, to_coord))
+		
+		if self.occupied_squares[to_coord] == player:
+			print("Invalid move: Self capture!")
+			return invalid_response	
+
+		to_index = (to_index[0]+delta_y, to_index[1]+delta_x)
+
+		if not self.is_valid_index(to_index):
+			print("Invalid capture jump: end index out of board!")
+			return invalid_response
+
+		to_coord = self.index_to_coord(to_index)
+		return (1, (from_coord, to_coord))

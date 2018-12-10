@@ -9,6 +9,8 @@ model_name = "1000r_1000r"
 data = []
 labels = []
 
+'''
+
 train_data_file = "../data/parsed_games.txt"
 with open(train_data_file) as dat_file:
 	for line in dat_file:
@@ -42,3 +44,5 @@ checkpoint_dir = os.path.dirname(checkpoint_path)
 cp_callback = tf.keras.callbacks.ModelCheckpoint(checkpoint_path, save_weights_only=True, verbose=1)
 
 model.fit(data, labels, epochs=10, callbacks=[cp_callback])
+
+'''
