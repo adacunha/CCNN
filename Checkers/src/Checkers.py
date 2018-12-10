@@ -14,6 +14,8 @@ class Board:
 
 		for i in range(21, 33):
 			self.place_own_pawn(-1, i)
+	
+		self.move_count = 0
 
 	def clear(self):
 		self.occupied_squares = {}
@@ -43,6 +45,9 @@ class Board:
 		piece = 2 if player == 1 else -2
 		self.place_piece(coord, piece)
 
+	def get_next_player(self, player):
+		return self.get_black_piece() if player == self.get_white_piece() else self.get_white_piece()
+
 	def place_piece(self, coord, piece):
 		self.unoccupied_squares.remove(coord)
 		if piece == self.get_black_piece() and coord >= 29:
@@ -63,6 +68,8 @@ class Board:
 	def move_piece(self, coords):
 		from_square = coords[0]
 		to_square = coords[1]
+		
+		self.move_count = self.move_count + 1
 		
 		if self.is_capture(coords):
 			self.capture(coords)
@@ -86,6 +93,9 @@ class Board:
 		delta_x = end_index[0] - start_index[0]
 		delta_y = end_index[1] - start_index[1]
 		return self.index_to_coord((start_index[0] + int(delta_x/2), start_index[1] + int(delta_y/2)))
+
+	def get_move_count(self):
+		return self.move_count
 
 	def coord_to_index(self, coord):
 		row = int((coord-1)/4)
@@ -140,6 +150,9 @@ class Board:
 			return self.get_white_piece()
 		return 0	
 
+	def is_drawn(self):
+		return self.get_move_count() >= 100
+	
 	def can_player_move(self, player):
 		for i in range(0, 128):
 			if self.parse_nn_output(i, player, False)[0] == 1:
