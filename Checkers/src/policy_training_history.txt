@@ -1,0 +1,351 @@
+Epoch 1/50
+2018-12-09 06:49:12.144286: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+1188160/1188334 [============================>.] - ETA: 0s - loss: 1.3155 - acc: 0.5519     
+Epoch 00001: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 355s 298us/step - loss: 1.3155 - acc: 0.5519
+Epoch 2/50
+1188256/1188334 [============================>.] - ETA: 0s - loss: 1.0492 - acc: 0.6269   
+Epoch 00002: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 334s 281us/step - loss: 1.0492 - acc: 0.6269
+Epoch 3/50
+1188320/1188334 [============================>.] - ETA: 0s - loss: 0.9722 - acc: 0.6511     
+Epoch 00003: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 15363s 13ms/step - loss: 0.9722 - acc: 0.6511
+Epoch 4/50
+1188192/1188334 [============================>.] - ETA: 0s - loss: 0.9262 - acc: 0.6663   
+Epoch 00004: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 383s 322us/step - loss: 0.9262 - acc: 0.6663
+Epoch 5/50
+1188224/1188334 [============================>.] - ETA: 0s - loss: 0.8942 - acc: 0.6770   
+Epoch 00005: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 386s 325us/step - loss: 0.8942 - acc: 0.6770
+Epoch 6/50
+1188224/1188334 [============================>.] - ETA: 0s - loss: 0.8693 - acc: 0.6855   
+Epoch 00006: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 388s 327us/step - loss: 0.8692 - acc: 0.6855
+Epoch 7/50
+1188256/1188334 [============================>.] - ETA: 0s - loss: 0.8508 - acc: 0.6918   
+Epoch 00007: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 513s 432us/step - loss: 0.8508 - acc: 0.6918
+Epoch 8/50
+1188256/1188334 [============================>.] - ETA: 0s - loss: 0.8348 - acc: 0.6973     
+Epoch 00008: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 508s 427us/step - loss: 0.8348 - acc: 0.6973
+Epoch 9/50
+1188224/1188334 [============================>.] - ETA: 0s - loss: 0.8213 - acc: 0.7021     
+Epoch 00009: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 513s 432us/step - loss: 0.8213 - acc: 0.7021
+Epoch 10/50
+1188320/1188334 [============================>.] - ETA: 0s - loss: 0.8098 - acc: 0.7062     
+Epoch 00010: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 510s 429us/step - loss: 0.8098 - acc: 0.7062
+Epoch 11/50
+1188192/1188334 [============================>.] - ETA: 0s - loss: 0.7994 - acc: 0.7097     
+Epoch 00011: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 7461s 6ms/step - loss: 0.7994 - acc: 0.7097
+Epoch 12/50
+1188224/1188334 [============================>.] - ETA: 0s - loss: 0.7901 - acc: 0.7129   
+Epoch 00012: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 609s 513us/step - loss: 0.7901 - acc: 0.7128
+Epoch 13/50
+1188256/1188334 [============================>.] - ETA: 0s - loss: 0.7824 - acc: 0.7157   
+Epoch 00013: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 1113s 937us/step - loss: 0.7824 - acc: 0.7157
+Epoch 14/50
+1188224/1188334 [============================>.] - ETA: 0s - loss: 0.7758 - acc: 0.7179     
+Epoch 00014: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 1928s 2ms/step - loss: 0.7758 - acc: 0.7179
+Epoch 15/50
+1188160/1188334 [============================>.] - ETA: 0s - loss: 0.7698 - acc: 0.7202     
+Epoch 00015: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 338s 285us/step - loss: 0.7698 - acc: 0.7202
+Epoch 16/50
+1188288/1188334 [============================>.] - ETA: 0s - loss: 0.7638 - acc: 0.7229   
+Epoch 00016: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 334s 281us/step - loss: 0.7638 - acc: 0.7229
+Epoch 17/50
+1188288/1188334 [============================>.] - ETA: 0s - loss: 0.7593 - acc: 0.7242   
+Epoch 00017: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 334s 281us/step - loss: 0.7593 - acc: 0.7242
+Epoch 18/50
+1188224/1188334 [============================>.] - ETA: 0s - loss: 0.7552 - acc: 0.7257   
+Epoch 00018: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 334s 281us/step - loss: 0.7552 - acc: 0.7257
+Epoch 19/50
+1188224/1188334 [============================>.] - ETA: 0s - loss: 0.7506 - acc: 0.7272   
+Epoch 00019: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 328s 276us/step - loss: 0.7506 - acc: 0.7272
+Epoch 20/50
+1188288/1188334 [============================>.] - ETA: 0s - loss: 0.7469 - acc: 0.7288   
+Epoch 00020: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 313s 263us/step - loss: 0.7469 - acc: 0.7288
+Epoch 21/50
+1188320/1188334 [============================>.] - ETA: 0s - loss: 0.7443 - acc: 0.7301   
+Epoch 00021: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 331s 278us/step - loss: 0.7443 - acc: 0.7301
+Epoch 22/50
+1188288/1188334 [============================>.] - ETA: 0s - loss: 0.7410 - acc: 0.7310   
+Epoch 00022: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 334s 281us/step - loss: 0.7410 - acc: 0.7310
+Epoch 23/50
+1188288/1188334 [============================>.] - ETA: 0s - loss: 0.7385 - acc: 0.7319   
+Epoch 00023: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 327s 275us/step - loss: 0.7385 - acc: 0.7319
+Epoch 24/50
+1188160/1188334 [============================>.] - ETA: 0s - loss: 0.7368 - acc: 0.7323   
+Epoch 00024: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 343s 288us/step - loss: 0.7369 - acc: 0.7323
+Epoch 25/50
+1188224/1188334 [============================>.] - ETA: 0s - loss: 0.7339 - acc: 0.7340   
+Epoch 00025: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 1481s 1ms/step - loss: 0.7339 - acc: 0.7340
+Epoch 26/50
+1188192/1188334 [============================>.] - ETA: 0s - loss: 0.7321 - acc: 0.7344   
+Epoch 00026: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 357s 301us/step - loss: 0.7320 - acc: 0.7344
+Epoch 27/50
+1188160/1188334 [============================>.] - ETA: 0s - loss: 0.7304 - acc: 0.7349   
+Epoch 00027: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 345s 290us/step - loss: 0.7304 - acc: 0.7349
+Epoch 28/50
+1188256/1188334 [============================>.] - ETA: 0s - loss: 0.7277 - acc: 0.7363   
+Epoch 00028: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 337s 283us/step - loss: 0.7277 - acc: 0.7363
+Epoch 29/50
+1188320/1188334 [============================>.] - ETA: 0s - loss: 0.7271 - acc: 0.7363   
+Epoch 00029: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 332s 280us/step - loss: 0.7271 - acc: 0.7363
+Epoch 30/50
+1188224/1188334 [============================>.] - ETA: 0s - loss: 0.7265 - acc: 0.7366     
+Epoch 00030: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 940s 791us/step - loss: 0.7265 - acc: 0.7366
+Epoch 31/50
+1188320/1188334 [============================>.] - ETA: 0s - loss: 0.7267 - acc: 0.7368   
+Epoch 00031: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 339s 285us/step - loss: 0.7267 - acc: 0.7368
+Epoch 32/50
+1188288/1188334 [============================>.] - ETA: 0s - loss: 0.7239 - acc: 0.7373   
+Epoch 00032: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 366s 308us/step - loss: 0.7240 - acc: 0.7373
+Epoch 33/50
+1188224/1188334 [============================>.] - ETA: 0s - loss: 0.7215 - acc: 0.7384     
+Epoch 00033: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 375s 316us/step - loss: 0.7215 - acc: 0.7384
+Epoch 34/50
+1188160/1188334 [============================>.] - ETA: 0s - loss: 0.7218 - acc: 0.7383   
+Epoch 00034: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 342s 288us/step - loss: 0.7218 - acc: 0.7383
+Epoch 35/50
+1188256/1188334 [============================>.] - ETA: 0s - loss: 0.7209 - acc: 0.7390   
+Epoch 00035: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 395s 333us/step - loss: 0.7209 - acc: 0.7390
+Epoch 36/50
+1188320/1188334 [============================>.] - ETA: 0s - loss: 0.7198 - acc: 0.7394   
+Epoch 00036: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 342s 288us/step - loss: 0.7198 - acc: 0.7394
+Epoch 37/50
+1188320/1188334 [============================>.] - ETA: 0s - loss: 0.7200 - acc: 0.7395   
+Epoch 00037: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 431s 363us/step - loss: 0.7200 - acc: 0.7395
+Epoch 38/50
+1188256/1188334 [============================>.] - ETA: 0s - loss: 0.7193 - acc: 0.7396   
+Epoch 00038: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 576s 485us/step - loss: 0.7193 - acc: 0.7396
+Epoch 39/50
+1188320/1188334 [============================>.] - ETA: 0s - loss: 0.7171 - acc: 0.7405     
+Epoch 00039: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 2214s 2ms/step - loss: 0.7171 - acc: 0.7405
+Epoch 40/50
+1188320/1188334 [============================>.] - ETA: 0s - loss: 0.7174 - acc: 0.7403     
+Epoch 00040: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 10892s 9ms/step - loss: 0.7174 - acc: 0.7403
+Epoch 41/50
+1188288/1188334 [============================>.] - ETA: 0s - loss: 0.7175 - acc: 0.7409      
+Epoch 00041: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 3411s 3ms/step - loss: 0.7175 - acc: 0.7409
+Epoch 42/50
+1188288/1188334 [============================>.] - ETA: 0s - loss: 0.7151 - acc: 0.7414     
+Epoch 00042: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 708s 596us/step - loss: 0.7151 - acc: 0.7414
+Epoch 43/50
+1188288/1188334 [============================>.] - ETA: 0s - loss: 0.7158 - acc: 0.7412     
+Epoch 00043: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 2671s 2ms/step - loss: 0.7158 - acc: 0.7412
+Epoch 44/50
+1188224/1188334 [============================>.] - ETA: 0s - loss: 0.7149 - acc: 0.7415     
+Epoch 00044: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 568s 478us/step - loss: 0.7149 - acc: 0.7415
+Epoch 45/50
+1188256/1188334 [============================>.] - ETA: 0s - loss: 0.7140 - acc: 0.7417     
+Epoch 00045: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 553s 465us/step - loss: 0.7140 - acc: 0.7417
+Epoch 46/50
+1188288/1188334 [============================>.] - ETA: 0s - loss: 0.7166 - acc: 0.7414     
+Epoch 00046: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 594s 499us/step - loss: 0.7165 - acc: 0.7414
+Epoch 47/50
+1188288/1188334 [============================>.] - ETA: 0s - loss: 0.7178 - acc: 0.7412     
+Epoch 00047: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 586s 493us/step - loss: 0.7178 - acc: 0.7412
+Epoch 48/50
+1188224/1188334 [============================>.] - ETA: 0s - loss: 0.7170 - acc: 0.7411     
+Epoch 00048: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 604s 508us/step - loss: 0.7170 - acc: 0.7411
+Epoch 49/50
+1188256/1188334 [============================>.] - ETA: 0s - loss: 0.7174 - acc: 0.7411     
+Epoch 00049: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 602s 506us/step - loss: 0.7174 - acc: 0.7411
+Epoch 50/50
+1188320/1188334 [============================>.] - ETA: 0s - loss: 0.7164 - acc: 0.7421     
+Epoch 00050: saving model to policy_network_checkpoints/64c_32c_1000r.ckpt
+WARNING:tensorflow:This model was compiled with a Keras optimizer (<tensorflow.python.keras.optimizers.Adam object at 0x12683e588>) but is being saved in TensorFlow format with `save_weights`. The model's weights will be saved, but unlike with TensorFlow optimizers in the TensorFlow format the optimizer's state will not be saved.
+
+Consider using a TensorFlow optimizer from `tf.train`.
+1188334/1188334 [==============================] - 607s 511us/step - loss: 0.7164 - acc: 0.7421

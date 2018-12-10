@@ -36,13 +36,13 @@ network_input = np.array(network_input)
 predictions = model.predict(network_input)
 
 first_move_guess = np.argmax(predictions[0])
-first_move_coords = board.parse_nn_output(first_move_guess)
-print("First move: ", board.parse_nn_output(first_move_guess))
+first_move_coords = board.parse_nn_output(first_move_guess, player_1)[1]
+print("First move: ", first_move_coords)
 board.move_piece(first_move_coords)
 
 network_input = np.array([board.get_cnn_input(player_2)])
 second_move_guess = np.argmax(model.predict(network_input))
-second_move_coords = board.parse_nn_output(second_move_guess)
+second_move_coords = board.parse_nn_output(second_move_guess, player_2)[1]
 print("Second move: ", second_move_coords)
 board.move_piece(second_move_coords)
 

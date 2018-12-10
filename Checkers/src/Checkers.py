@@ -132,11 +132,34 @@ class Board:
 		result[(coord[0]-1)*4+offset] = 1
 		return result
 
+	def check_move_permissions(self, move, player):
+		from_coord = move[0]
+		to_coord = move[1]
+		piece = self.occupied_pieces[from_coord] * player
+
+		# Kings can move both directions
+		if piece == 2:
+			return True
+
+		from_index = self.coord_to_index(from_coord)
+		to_index = self.coord_to_index(to_coord)
+	
+		if player == self.get_black_player():
+			if to_index[0] <= from_index[0]:
+				return False
+		
+		if player == self.get_white_player():
+			if to_index[0] >= from_index[1]:
+				return False
+	
+		return True
+		
+
 	def is_valid_index(self, index):
 		if index[0] < 0 or index[0] > 7:
 			print("Invalid move: Out of board!")
 			return False
-		if index[1] < 0 or index[1] > 3:
+		if index[1] < 0 or index[1] > 7:
 			print("Invalid move: Out of board!")
 			return False
 		return True
@@ -187,4 +210,10 @@ class Board:
 			return invalid_response
 
 		to_coord = self.index_to_coord(to_index)
-		return (1, (from_coord, to_coord))
+		move = (from_coord, to_coord)
+
+		if not self.check_move_permissions(move, player):
+			print("Invalid Move: Invalid move permissions!")
+			return invalid_response
+
+		return (1, move)
