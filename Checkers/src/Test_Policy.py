@@ -27,7 +27,7 @@ board = Checkers.Board()
 player_1 = board.get_black_piece()
 player_2 = board.get_white_piece()
 
-names = {player_1 : "black", player_2 : "white"}
+names = {player_1 : "black", player_2 : "white", 0 : "draw"}
 
 
 def play_turn(board, player):
@@ -69,6 +69,8 @@ def play_turn(board, player):
 
 board.show()
 
+turn_count = 0
+
 while not board.has_winner():
 
 	if not play_turn(board, player_1):
@@ -77,4 +79,8 @@ while not board.has_winner():
 	if not play_turn(board, player_2):
 		break
 
-print("Winner: ", board.has_winner())
+	turn_count = turn_count + 1
+	if turn_count == 1000:
+		break
+
+print("Winner: ", names[board.has_winner()], " in ", turn_count, " turns!")
