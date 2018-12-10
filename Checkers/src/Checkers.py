@@ -1,4 +1,5 @@
 import numpy as np
+import copy
 
 class Board:
 	
@@ -25,8 +26,8 @@ class Board:
 
 	def deep_copy(self):
 		result = Board()
-		result.occupied_squares = self.occupied_squares
-		result.unoccupied_squares = self.unoccupied_squares
+		result.occupied_squares = copy.deepcopy(self.occupied_squares)
+		result.unoccupied_squares = set(self.unoccupied_squares)
 		return result
 
 	def place_opponent_pawn(self, player, coord):
@@ -237,7 +238,7 @@ class Board:
 			return False
 		return True
 
-	def parse_nn_output(self, nn_output, player, logging):
+	def parse_nn_output(self, nn_output, player, logging=False):
 
 		invalid_response = (-1, (-1, -1))
 

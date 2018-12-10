@@ -5,8 +5,8 @@ import AlphaCheckers
 import Checkers
 
 board = Checkers.Board()
-alpha_player = AlphaCheckers.Player(board.get_black_piece())
+alpha_player = AlphaCheckers.Player()
 
-alpha_player.evaluate_turn_policy(board)
-alpha_player.evaluate_turn_value(board)
+alpha_move = alpha_player.play_turn(board, board.get_black_piece())
 
+print(alpha_move)
