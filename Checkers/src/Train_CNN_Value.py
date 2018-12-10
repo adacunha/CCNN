@@ -9,12 +9,12 @@ model_name = "64c_32c_1000r"
 data = []
 labels = []
 
-train_data_file = "../data/parsed_games_small.txt"
+train_data_file = "../data/parsed_games.txt"
 with open(train_data_file) as dat_file:
 	for line in dat_file:
 		raw_data = line.strip().split()	
 		x = [int(x) for x in raw_data[0:32]]
-		y = [int(x) for x in raw_data[160:162]]
+		y = [int(x) for x in raw_data[160:163]]
 		data.append(np.array(x).reshape(8, 4, 1))
 		labels.append(y)
 

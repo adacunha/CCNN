@@ -148,3 +148,8 @@ class Board:
 			to_index = (to_index[0]+delta_y, to_index[1]+delta_x)
 			to_coord = self.index_to_coord(to_index)
 		return (from_coord, to_coord)
+
+	def is_valid_nn_output(self, nn_output, player):
+
+	def clean_nn_output(self, nn_output, player):
+		
