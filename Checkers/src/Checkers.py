@@ -112,15 +112,17 @@ class Board:
 		
 	def show(self):
 		print()
-		for i in range(0, 32):
-			if i != 0 and not i%4 and int(i/4)&1:
-				print()
-			else:
-				print(" ", end='')
-			if not i%4 and not int(i/4)&1:
-				print()
-			print(self.get_piece(i+1), end='')
-		print(" ", end='')
+	
+		board = [[0 for col in range(0, 8)] for row in range(0, 8)]
+		for key in self.occupied_squares:
+			index = self.coord_to_index(key)
+			piece = self.occupied_squares[key]
+			board[index[0]][index[1]] = piece
+
+		for row in range(0, 8):
+			for col in range(0, 8):
+				print('{0:^4}'.format(board[row][col]), end='')
+			print()
 		print()
 
 	def has_winner(self):

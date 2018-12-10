@@ -67,21 +67,28 @@ def play_nn_turn(board, player):
 		board.move_piece(seq_move_coords)	
 		move_coords = seq_move_coords
 	print(names[player], " ", log_str)
-	board.show()
 	return True
 
 def play_human_turn(board, player):
-	
+	while True:
+		move = input().split()
+		if len(move) == 1:
+			return
+		from_coord = int(move[0])
+		to_coord = int(move[1])
+		board.move_piece((from_coord, to_coord))	
 
 board.show()
 turn_count = 0
 while not board.has_winner():
 	if not play_nn_turn(board, player_1):
 		break
+	board.show()
 
 	#if not play_nn_turn(board, player_2):
 	#	break
 	play_human_turn(board, player_2)
+	board.show()
 
 	turn_count = turn_count + 1
 	if turn_count == 100:
