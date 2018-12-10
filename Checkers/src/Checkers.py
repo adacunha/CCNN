@@ -175,7 +175,7 @@ class Board:
 		prob = 0
 		new_guess = [0 for i in range(0, len(guess))]
 		for i in range(0, 128):
-			if not self.parse_nn_output(i, player, False)[0] == -1:
+			if  self.parse_nn_output(i, player, False)[0] == 1:
 				new_guess[i] = guess[i]
 				prob = prob + guess[i]
 		

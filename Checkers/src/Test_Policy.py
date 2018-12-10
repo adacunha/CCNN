@@ -29,8 +29,7 @@ player_2 = board.get_white_piece()
 
 names = {player_1 : "black", player_2 : "white", 0 : "draw"}
 
-
-def play_turn(board, player):
+def play_nn_turn(board, player):
 	move_guess = model.predict(np.array([board.get_cnn_input(player)]))[0]
 	move_guess = board.clean_nn_guess(move_guess, player)
 	move_guess = np.argmax(move_guess)
@@ -47,7 +46,11 @@ def play_turn(board, player):
 	log_str = log_str + str(move_coords[0]) + move_type_str + str(move_coords[1])
 	while capturing:	
 		move_guess = model.predict(np.array([board.get_cnn_input(player)]))[0]
+		print("Before: ")
+		print(move_guess)
 		move_guess = board.clean_nn_guess(move_guess, player)
+		print("After: ")
+		print(move_guess)
 		move_guess = np.argmax(move_guess)
 		move_valid = move[0] == 1
 		seq_move_coords = move[1]
@@ -67,20 +70,20 @@ def play_turn(board, player):
 	board.show()
 	return True
 
+def play_human_turn(board, player):
+	
+
 board.show()
-
 turn_count = 0
-
 while not board.has_winner():
+	if not play_nn_turn(board, player_1):
+		break
 
-	if not play_turn(board, player_1):
-		break
-		
-	if not play_turn(board, player_2):
-		break
+	#if not play_nn_turn(board, player_2):
+	#	break
+	play_human_turn(board, player_2)
 
 	turn_count = turn_count + 1
-	if turn_count == 1000:
+	if turn_count == 100:
 		break
-
 print("Winner: ", names[board.has_winner()], " in ", turn_count, " turns!")
