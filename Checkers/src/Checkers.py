@@ -42,10 +42,24 @@ class Board:
 		if piece == self.get_white_piece() and coord <= 4:
 			piece = piece * 2
 		self.occupied_squares[coord] = piece
+	
+	def is_capture(self, coords):
+		from_square = coords[0]
+		to_square = coords[1]
+		
+		from_index = self.coord_to_index(from_square)
+		to_index = self.coord_to_index(to_square)	
+
+		return abs(to_index[0] - from_index[0]) > 1
 
 	def move_piece(self, coords):
 		from_square = coords[0]
 		to_square = coords[1]
+		
+		if self.is_capture(coords):
+			self.capture(coords)
+			return
+
 		piece = self.get_piece(from_square)
 		self.remove_piece(from_square)
 		self.place_piece(to_square, piece);
@@ -157,6 +171,19 @@ class Board:
 		result[(coord[0]-1)*4+offset] = 1
 		return result
 
+	def clean_nn_guess(self, guess, player):
+		prob = 0
+		new_guess = [0 for i in range(0, len(guess))]
+		for i in range(0, 128):
+			if not self.parse_nn_output(i, player, False)[0] == -1:
+				new_guess[i] = guess[i]
+				prob = prob + guess[i]
+		
+		for i in range(0, 128):
+			new_guess[i] = new_guess[i] / prob
+
+		return np.array(new_guess)
+
 	def check_move_permissions(self, move, player):
 		from_coord = move[0]
 		to_coord = move[1]
@@ -198,7 +225,7 @@ class Board:
 				print("Invalid move: No Piece at Tile!")
 			return invalid_response	
 
-		if self.occupied_squares[from_coord] != player:
+		if np.sign(self.occupied_squares[from_coord]) != np.sign(player):
 			if logging:
 				print("Invalid move: Not your piece!")
 			return invalid_response

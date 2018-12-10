@@ -27,47 +27,54 @@ board = Checkers.Board()
 player_1 = board.get_black_piece()
 player_2 = board.get_white_piece()
 
-board.show()
+names = {player_1 : "black", player_2 : "white"}
 
-while not board.has_winner():
-
-	black_move_guess = np.argmax(model.predict(np.array([board.get_cnn_input(player_1)]))[0])
-	black_move = board.parse_nn_output(black_move_guess, player_1, True)
-	black_move_valid = black_move[0]
-	black_move_coords = black_move[1]
-	if black_move_valid == -1:
-		print("Invalid black move: ", black_move)
-		break
-	board.move_piece(black_move_coords)
-	board.show()
-	print("Black: ", black_move_coords)
-
-	white_move_guess = np.argmax(model.predict(np.array([board.get_cnn_input(player_2)]))[0])
-	white_move = board.parse_nn_output(white_move_guess, player_2, True)
-	white_move_valid = white_move[0]
-	white_move_coords = white_move[1]
-	if white_move_valid == -1:
-		print("Invalid white move: ", white_move)
-		break
-	board.move_piece(white_move_coords)
-	board.show()
-	print("White: ", white_move_coords)
-
-print("Winner: ", board.has_winner())
 
 def play_turn(board, player):
-	move_guess = np.argmax(model.predict(np.array([board.get_cnn_input(player)]))[0])
+	move_guess = model.predict(np.array([board.get_cnn_input(player)]))[0]
+	move_guess = board.clean_nn_guess(move_guess, player)
+	move_guess = np.argmax(move_guess)
 	move = board.parse_nn_output(move_guess, player, True)
 	move_valid = move[0] == 1
 	move_coords = move[1]
 	if not move_valid:
-		print("Invalid move by player: ", player)
+		print("Invalid move by player: ", player, ": ", move_coords)
 		return False
-	capturing = board.move_piece(move_coords)	
+	log_str = ""
+	capturing = board.is_capture(move_coords)
+	board.move_piece(move_coords)	
+	move_type_str = "x" if capturing else "->"
+	log_str = log_str + str(move_coords[0]) + move_type_str + str(move_coords[1])
 	while capturing:	
 		move_guess = model.predict(np.array([board.get_cnn_input(player)]))[0]
-		
-		
-		
+		move_guess = board.clean_nn_guess(move_guess, player)
+		move_guess = np.argmax(move_guess)
+		move_valid = move[0] == 1
+		seq_move_coords = move[1]
+		if not move_valid:
+			print("Invalid seq jump: ", seq_move_coords)
+			break	
+		if seq_move_coords[0] != move_coords[1]:
+			print("Disconnected seq jump: ", seq_move_coords)
+			break
+		if not board.is_capture(seq_move_coords):
+			print("Non-Capture seq jump: ", seq_move_coords)
+			break
+		log_str = log_str + "x" + str(seq_move_coords[1])
+		board.move_piece(seq_move_coords)	
+		move_coords = seq_move_coords
+	print(names[player], " ", log_str)
+	board.show()
+	return True
 
+board.show()
 
+while not board.has_winner():
+
+	if not play_turn(board, player_1):
+		break
+		
+	if not play_turn(board, player_2):
+		break
+
+print("Winner: ", board.has_winner())
