@@ -66,8 +66,6 @@ class Player:
 		for it in range(0, iteration_count):
 			history = set()
 			leaf = root.traverse_to_leaf(history)
-			for node in history:
-				node.board.show()
 			leaf.expand(self)
 			leaf_values = self.evaluate_turn_value(leaf.board, leaf.player)
 			player_values = {1 : leaf_values[1], -1 : leaf_values[2]}

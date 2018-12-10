@@ -66,7 +66,6 @@ class Node:
 			move = play_board.parse_nn_output(max_index, current_player)[1]
 			play_board.move_piece(move)
 			current_player = play_board.get_next_player(current_player)
-		print("determing rollout winner!")
 		win_state = play_board.has_winner()
 		if win_state:
 			return win_state
