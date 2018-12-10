@@ -27,22 +27,29 @@ board = Checkers.Board()
 player_1 = board.get_black_piece()
 player_2 = board.get_white_piece()
 
-cnn_input = board.get_cnn_input(player_1)
+board.show()
 
-network_input = []
-network_input.append(cnn_input)
-network_input = np.array(network_input)
+while not board.has_winner():
 
-predictions = model.predict(network_input)
+	black_move_guess = np.argmax(model.predict(np.array([board.get_cnn_input(player_1)]))[0])
+	black_move = board.parse_nn_output(black_move_guess, player_1)
+	black_move_valid = black_move[0]
+	if not black_move_valid:
+		print("Invalid black move: ", black_move)
+		break
+	black_move_coords = black_move[1]
+	board.move_piece(black_move_coords)
+	board.show()
 
-first_move_guess = np.argmax(predictions[0])
-first_move_coords = board.parse_nn_output(first_move_guess, player_1)[1]
-print("First move: ", first_move_coords)
-board.move_piece(first_move_coords)
+	white_move_guess = np.argmax(model.predict(np.array([board.get_cnn_input(player_2)]))[0])
+	white_move = board.parse_nn_output(white_move_guess, player_2)
+	white_move_valid = white_move[0]
+	if not white_move_valid:
+		print("Invalid white move: ", black_move)
+		break
+	white_move_coords = white_move[1]
+	board.move_piece(white_move_coords)
+	board.show()
 
-network_input = np.array([board.get_cnn_input(player_2)])
-second_move_guess = np.argmax(model.predict(network_input))
-second_move_coords = board.parse_nn_output(second_move_guess, player_2)[1]
-print("Second move: ", second_move_coords)
-board.move_piece(second_move_coords)
+print("Winner: ", board.has_winner())
 

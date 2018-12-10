@@ -108,6 +108,19 @@ class Board:
 			print(self.get_piece(i+1), end='')
 		print(" ", end='')
 		print()
+
+	def has_winner(self):
+		if not self.can_player_move(self.get_white_piece()):
+			return self.get_black_piece()
+		if not self.can_player_move(self.get_black_piece()):
+			return self.get_white_piece()
+		return 0	
+
+	def can_player_move(self, player):
+		for i in range(0, 128):
+			if self.parse_nn_output(i, player)[0] == 1:
+				return True
+		return False
 	
 	def get_nn_input(self, player):
 		return [self.get_piece(i) * player for i in range(1, 33)]
@@ -135,7 +148,7 @@ class Board:
 	def check_move_permissions(self, move, player):
 		from_coord = move[0]
 		to_coord = move[1]
-		piece = self.occupied_pieces[from_coord] * player
+		piece = self.occupied_squares[from_coord] * player
 
 		# Kings can move both directions
 		if piece == 2:
@@ -144,11 +157,11 @@ class Board:
 		from_index = self.coord_to_index(from_coord)
 		to_index = self.coord_to_index(to_coord)
 	
-		if player == self.get_black_player():
+		if player == self.get_black_piece():
 			if to_index[0] <= from_index[0]:
 				return False
 		
-		if player == self.get_white_player():
+		if player == self.get_white_piece():
 			if to_index[0] >= from_index[1]:
 				return False
 	
@@ -157,10 +170,10 @@ class Board:
 
 	def is_valid_index(self, index):
 		if index[0] < 0 or index[0] > 7:
-			print("Invalid move: Out of board!")
+			#print("Invalid move: Out of board!")
 			return False
 		if index[1] < 0 or index[1] > 7:
-			print("Invalid move: Out of board!")
+			#print("Invalid move: Out of board!")
 			return False
 		return True
 
@@ -171,11 +184,11 @@ class Board:
 		from_coord = int(nn_output/4)+1
 
 		if from_coord in self.unoccupied_squares:
-			print("Invalid move: No Piece at Tile!")
+			#print("Invalid move: No Piece at Tile!")
 			return invalid_response	
 
 		if self.occupied_squares[from_coord] != player:
-			print("Invalid move: Not your piece!")
+			#print("Invalid move: Not your piece!")
 			return invalid_response
 
 		from_index = self.coord_to_index(from_coord)
@@ -191,7 +204,7 @@ class Board:
 		to_index = (from_index[0]+delta_y, from_index[1]+delta_x)
 		
 		if not self.is_valid_index(to_index):
-			print("Invalid move: Index out of board!")
+			#print("Invalid move: Index out of board!")
 			return invalid_response
 
 		to_coord = self.index_to_coord(to_index)
@@ -200,20 +213,20 @@ class Board:
 			return (1, (from_coord, to_coord))
 		
 		if self.occupied_squares[to_coord] == player:
-			print("Invalid move: Self capture!")
+			#print("Invalid move: Self capture!")
 			return invalid_response	
 
 		to_index = (to_index[0]+delta_y, to_index[1]+delta_x)
 
 		if not self.is_valid_index(to_index):
-			print("Invalid capture jump: end index out of board!")
+			#print("Invalid capture jump: end index out of board!")
 			return invalid_response
 
 		to_coord = self.index_to_coord(to_index)
 		move = (from_coord, to_coord)
 
 		if not self.check_move_permissions(move, player):
-			print("Invalid Move: Invalid move permissions!")
+			#print("Invalid Move: Invalid move permissions!")
 			return invalid_response
 
 		return (1, move)
