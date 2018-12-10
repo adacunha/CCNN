@@ -118,9 +118,21 @@ class Board:
 
 	def can_player_move(self, player):
 		for i in range(0, 128):
-			if self.parse_nn_output(i, player)[0] == 1:
+			if self.parse_nn_output(i, player, False)[0] == 1:
 				return True
 		return False
+
+	def read_nn_output(self, move):
+		from_coord = int(move/4)+1
+		direction = move%4
+		direction_str = "northwest"
+		if direction == 1:
+			direction_str = "northeast"
+		if direction == 2:
+			direction_str = "southwest"
+		if direction == 3:
+			direction_str = "southeast"
+		return "From: " +  str(from_coord) + " " + direction_str
 	
 	def get_nn_input(self, player):
 		return [self.get_piece(i) * player for i in range(1, 33)]
@@ -162,7 +174,7 @@ class Board:
 				return False
 		
 		if player == self.get_white_piece():
-			if to_index[0] >= from_index[1]:
+			if to_index[0] >= from_index[0]:
 				return False
 	
 		return True
@@ -170,25 +182,25 @@ class Board:
 
 	def is_valid_index(self, index):
 		if index[0] < 0 or index[0] > 7:
-			#print("Invalid move: Out of board!")
 			return False
 		if index[1] < 0 or index[1] > 7:
-			#print("Invalid move: Out of board!")
 			return False
 		return True
 
-	def parse_nn_output(self, nn_output, player):
+	def parse_nn_output(self, nn_output, player, logging):
 
 		invalid_response = (-1, (-1, -1))
 
 		from_coord = int(nn_output/4)+1
 
 		if from_coord in self.unoccupied_squares:
-			#print("Invalid move: No Piece at Tile!")
+			if logging:
+				print("Invalid move: No Piece at Tile!")
 			return invalid_response	
 
 		if self.occupied_squares[from_coord] != player:
-			#print("Invalid move: Not your piece!")
+			if logging:
+				print("Invalid move: Not your piece!")
 			return invalid_response
 
 		from_index = self.coord_to_index(from_coord)
@@ -204,29 +216,38 @@ class Board:
 		to_index = (from_index[0]+delta_y, from_index[1]+delta_x)
 		
 		if not self.is_valid_index(to_index):
-			#print("Invalid move: Index out of board!")
+			if logging:
+				print("Invalid move: Index out of board!")
 			return invalid_response
 
 		to_coord = self.index_to_coord(to_index)
 
-		if to_coord in self.unoccupied_squares:
-			return (1, (from_coord, to_coord))
-		
-		if self.occupied_squares[to_coord] == player:
-			#print("Invalid move: Self capture!")
-			return invalid_response	
+		if to_coord in self.occupied_squares:
 
-		to_index = (to_index[0]+delta_y, to_index[1]+delta_x)
+			if self.occupied_squares[to_coord] == player:
+				if logging:
+					print("Invalid move: Self capture!")
+				return invalid_response	
 
-		if not self.is_valid_index(to_index):
-			#print("Invalid capture jump: end index out of board!")
-			return invalid_response
+			to_index = (to_index[0]+delta_y, to_index[1]+delta_x)
 
-		to_coord = self.index_to_coord(to_index)
+			if not self.is_valid_index(to_index):
+				if logging:
+					print("Invalid capture jump: end index out of board!")
+				return invalid_response
+
+			to_coord = self.index_to_coord(to_index)
+			
+			if to_coord in self.occupied_squares:
+				if logging:
+					print("Invalid capture jump: end location occupied!")
+				return invalid_response
+
 		move = (from_coord, to_coord)
 
 		if not self.check_move_permissions(move, player):
-			#print("Invalid Move: Invalid move permissions!")
+			if logging:
+				print("Invalid Move: Invalid move permissions!")
 			return invalid_response
 
 		return (1, move)
