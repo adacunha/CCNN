@@ -11,7 +11,7 @@ class Node:
 		self.children = set()	
 
 	def get_exploration_score(self):
-		return self.prior / (1 + self.visit_count)
+		return 90*self.prior / (1 + self.visit_count)
 
 	def get_exploitation_score(self):
 		if self.visit_count == 0:

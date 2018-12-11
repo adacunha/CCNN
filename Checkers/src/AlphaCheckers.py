@@ -88,6 +88,7 @@ class Player:
 		else:
 			win_index = 2
 			lose_index = 1	
+		print("AlphaCheckers move: ", log_str)
 		print("Chances of winning: ", win_chances[win_index], " losing: ", win_chances[lose_index], " drawing: ", win_chances[draw_index])
 		return moves
 
