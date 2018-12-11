@@ -57,9 +57,39 @@ class Player:
 		outcome_guess = self.value_network.predict(np.array([board.get_cnn_input(player)]))[0]
 		return outcome_guess
 
-	def play_turn(self, board, player):
-		best_move = self.mcts(board, player, 10)
-		return best_move
+	def play_turn(self, b, player):
+		board = b.deep_copy()
+		moves = []
+		mcts_it_count = 10
+		move = self.mcts(board, player, mcts_it_count)
+		moves.append(move)
+		capturing = board.is_capture(move)
+		board.move_piece(move)
+		move_type_str = "x" if capturing else "->"
+		log_str = ""
+		log_str = log_str + str(move[0]) + move_type_str + str(move[1])
+		while capturing:
+			next_move = self.mcts(board, player, mcts_it_count)
+			if next_move[0] != move[1]:
+				break
+			if not board.is_capture(next_move):
+				break
+			log_str = log_str + "x" + str(next_move[1])
+			board.move_piece(next_move)	
+			moves.append(next_move)
+			move = next_move
+		win_chances = self.evaluate_turn_value(board, board.get_next_player(player))
+		win_index = -1
+		lose_index = -1
+		draw_index = 0
+		if player == board.get_black_piece():
+			win_index = 1
+			lose_index = 2
+		else:
+			win_index = 2
+			lose_index = 1	
+		print("Chances of winning: ", win_chances[win_index], " losing: ", win_chances[lose_index], " drawing: ", win_chances[draw_index])
+		return moves
 
 	def mcts(self, board, player, iteration_count=100, mixing_hyperparameter=0.5):
 		root = Node((-1,-1), 1, player, board)
