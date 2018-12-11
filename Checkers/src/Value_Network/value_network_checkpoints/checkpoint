@@ -1,0 +1,2 @@
+model_checkpoint_path: "64c_32c_1000r.ckpt"
+all_model_checkpoint_paths: "64c_32c_1000r.ckpt"
