@@ -1,5 +1,6 @@
 import numpy as np
 
+# This Node is tailored for Monte-Carlo Tree Search
 class Node:
 	def __init__(self, move, prior, player, board):
 		self.move = move

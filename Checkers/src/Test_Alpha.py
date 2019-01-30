@@ -4,7 +4,6 @@ import numpy as np
 import AlphaCheckers
 import Checkers
 
-
 def play_human_turn(board, player):
 	while True:
 		print("Please enter your move as checkers move coordinates: (ie. 11 15)")

@@ -6,6 +6,7 @@ import os
 import Checkers
 from MCTS import Node 
 
+# This class coordinates search and evaluation
 class Player:
 
 	def __init__(self):
